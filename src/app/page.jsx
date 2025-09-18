@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { ThemeProvider } from './components/providers/theme-provider';
+
 
 // Data for the website
 const websiteData = {
