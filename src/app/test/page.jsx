@@ -1,51 +1,63 @@
-'use client'
-import React, { useState } from "react";
+import Link from 'next/link'
+import React from 'react'
 
-const questions = [
-  { q: "1) Choose the correct article: ___ apple a day keeps the doctor away.", options: ["A", "An", "The"], answer: "An" },
-  { q: "2) Past tense of 'go' is:", options: ["goed", "went", "gone"], answer: "went" },
-  { q: "3) Translate: 'Men kitob o‘qiyapman.'", options: ["I read a book", "I am reading a book", "I will read a book"], answer: "I am reading a book" },
-  { q: "4) Which one is correct?", options: ["She don’t like tea", "She doesn’t like tea", "She not like tea"], answer: "She doesn’t like tea" },
-  { q: "5) Fill in: If I ___ rich, I would travel the world.", options: ["am", "was", "were"], answer: "were" },
-  { q: "6) Which is formal?", options: ["What’s up?", "How do you do?", "Yo!"], answer: "How do you do?" },
-  { q: "7) Choose the synonym of 'big':", options: ["tiny", "huge", "small"], answer: "huge" },
-  { q: "8) Which sentence is correct?", options: ["He has lived here since 5 years", "He has lived here for 5 years", "He lived here since 5 years"], answer: "He has lived here for 5 years" },
-  { q: "9) Advanced: The book, ___ you gave me, was fascinating.", options: ["which", "what", "who"], answer: "which" },
-  { q: "10) Advanced: Choose the correct sentence.", options: [
-      "Had I known about the traffic, I would have left earlier.",
-      "If I would know about the traffic, I had left earlier.",
-      "If I know about the traffic, I would left earlier."
-    ], answer: "Had I known about the traffic, I would have left earlier."
-  },
-];
-
-function TestCEFR() {
-  const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState(null);
-
-  const handleChange = (index, value) => {
-    setAnswers({ ...answers, [index]: value });
-  };
-
-  const evaluateCEFR = () => {
-    let score = 0;
-    questions.forEach((q, i) => {
-      if (answers[i] === q.answer) score++;
-    });
-
-    let level = "";
-    if (score <= 2) level = "A1 (Beginner)";
-    else if (score <= 4) level = "A2 (Elementary)";
-    else if (score <= 6) level = "B1 (Intermediate)";
-    else if (score <= 8) level = "B2 (Upper-Intermediate)";
-    else if (score === 9) level = "C1 (Advanced)";
-    else if (score === 10) level = "C2(ChatGpt)";
-
-    setResult({ score, level });
-  };
+const page = () => {
+const database = {
+  courses: [
+    {
+      title: "A1 – Beginner",
+      description: "Basic grammar practice with simple present, articles, pronouns, and very easy sentence structures.",
+      level: "Beginner",
+      TestAmount: "10",
+      link: "/darajalar/beginner"
+    },
+    {
+      title: "A2 – Elementary",
+      description: "Grammar practice with past simple, questions, prepositions, and more everyday sentence patterns.",
+      level: "Elementary",
+      TestAmount: "10",
+      link: "/darajalar/elementary"
+    },
+    {
+      title: "B1 – Intermediate",
+      description: "Grammar tests on present perfect, comparatives, modals, and sentence combinations.",
+      level: "Intermediate",
+      TestAmount: "10",
+      link: "/darajalar/intermediate"
+    },
+    {
+      title: "B2 – Upper-Intermediate",
+      description: "Practice with conditionals, passive voice, reported speech, and complex sentence structures.",
+      level: "Upper-Intermediate",
+      TestAmount: "10",
+      link: "/darajalar/upper-intermediate"
+    },
+    {
+      title: "C1 – Advanced",
+      description: "Challenging grammar tests with advanced tenses, mixed conditionals, and detailed sentence transformations.",
+      level: "Advanced",
+      TestAmount: "10",
+      link: "/darajalar/advanced"
+    },
+    {
+      title: "C2 – Proficient",
+      description: "High-level grammar practice focusing on accuracy, subtle differences, and native-like sentence use.",
+      level: "Proficient",
+      TestAmount: "10",
+      link: "/darajalar/proficient"
+    },
+     {
+      title: "A1-C2  questions",
+      description: "High-level grammar practice where you can know your level",
+      level: "Beginner-Proficient",
+      TestAmount: "10",
+      link: "/darajalar/quicktest"
+    },
+  ]
+}
 
   return (
-    <div className="all">
+    <div>
        <header className="header">
     <div className="container">
       <div className="header-content">
@@ -66,47 +78,35 @@ function TestCEFR() {
       </div>
     </div>
   </header>
-    <div className="test-container">
-      
-      <h2 className="test-title">English Level Test (CEFR)</h2>
-
-      {questions.map((q, i) => (
-        <div key={i} className="question-block">
-          <p>{q.q}</p>
-          {q.options.map((opt, j) => (
-            <label key={j} className="option">
-              <input
-                type="radio"
-                name={`q-${i}`}
-                value={opt}
-                onChange={(e) => handleChange(i, e.target.value)}
-              />
-              {opt}
-            </label>
-          ))}
-        </div>
-      ))}
-
-      <button className="submit-btn" onClick={evaluateCEFR}>
-        Submit
-      </button>
-
-      {result && (
-        <div className="result">
-          <p>
-            Score: {result.score} / {questions.length}
-          </p>
-          <p>Predicted Level: <strong>{result.level}</strong></p>
-        </div>
-      )}
+    <section id="courses" className="courses">
+    <div className="container">
+      <div className="section-title">
+        <h2>Our Tests</h2>
+        <p>Take grammar tests from A1 to C2, all levels included.</p>
+      </div>
+      <div className="courses-grid">
+        {database.courses.map((course, index) => (
+          <div key={index} className="course-card">
+            <h1>{course.title}</h1>
+            <h2>{course.description}</h2>
+            <div className="course-meta">
+              
+              <span>👤 {course.level}</span>
+              <h1>Test Amount {course.TestAmount}</h1>
+              <Link href={course.link}><button className='lkmn'>Contact</button></Link>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-     <footer id="contact" className="footer">
+  </section>
+   <footer id="contact" className="footer">
     <div className="container">
       <p>&copy; 2025 Mrakhmadjon IELTS Learning Center. All rights reserved.</p>
     </div>
   </footer>
     </div>
-  );
+  )
 }
 
-export default TestCEFR;
+export default page

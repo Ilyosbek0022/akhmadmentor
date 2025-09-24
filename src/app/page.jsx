@@ -180,9 +180,9 @@ const Testimonials = () => {
           <p>{websiteData.testimonials[currentTestimonial].text}</p>
           <h4>{websiteData.testimonials[currentTestimonial].name} - {websiteData.testimonials[currentTestimonial].score}</h4>
         </div>
-        <div>
-          <button onClick={prev}>←</button>
-          <button onClick={next}>→</button>
+        <div >
+          <button onClick={prev} className='slider'><h1>←</h1></button>
+          <button onClick={next} className='slider'><h1>→</h1></button>
         </div>
       </div>
     </section>
