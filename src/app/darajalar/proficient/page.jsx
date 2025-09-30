@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from "react";
+
 const questions = [
   { q: "1) Advanced phrase: He is known ___ his generosity.", options: ["for", "about", "with"], answer: "for" },
   { q: "2) Correct sentence:", options: ["Were I to know, I would tell you.", "If I to know, I would tell you.", "If I knew, I tell you."], answer: "Were I to know, I would tell you." },
@@ -12,9 +13,6 @@ const questions = [
   { q: "9) Correct form:", options: ["He denied to steal the money.", "He denied having stolen the money.", "He denied steal the money."], answer: "He denied having stolen the money." },
   { q: "10) Advanced inversion:", options: ["Little I knew about it.", "Little did I know about it.", "I little did know about it."], answer: "Little did I know about it." },
 ];
-
-
-
 
 function TestCEFR() {
   const [answers, setAnswers] = useState({});
@@ -29,79 +27,69 @@ function TestCEFR() {
     questions.forEach((q, i) => {
       if (answers[i] === q.answer) score++;
     });
-
-    let level = "";
-    if (score <= 2) level = "A1 (Beginner)";
-    else if (score <= 4) level = "A2 (Elementary)";
-    else if (score <= 6) level = "B1 (Intermediate)";
-    else if (score <= 8) level = "B2 (Upper-Intermediate)";
-    else if (score === 9) level = "C1 (Advanced)";
-    else if (score === 10) level = "C2(ChatGpt)";
-
-    setResult({ score, level });
+    setResult(score);
   };
 
   return (
     <div className="all">
-       <header className="header">
-    <div className="container">
-      <div className="header-content">
-         <a href="/">
-        <div className="logo">
-          <div className="logo-icon">M</div>
-          <div className="logo-text">Mrakhmadjon IELTS</div>
-        </div></a>
-        <nav className="nav">
-          <ul>
-                   <li><a href="/">Home</a></li>
-            <li><a href="/price">Price</a></li>
-            <li><a href="/test">Tests</a></li>
-            <li><a href="/locate">Location</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
+      <header className="header">
+        <div className="container">
+          <div className="header-content">
+            <a href="/">
+              <div className="logo">
+                <div className="logo-icon">M</div>
+                <div className="logo-text">Mrakhmadjon IELTS</div>
+              </div>
+            </a>
+            <nav className="nav">
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/price">Price</a></li>
+                <li><a href="/test">Tests</a></li>
+                <li><a href="/locate">Location</a></li>
+                <li><a href="/contact">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div className="test-container">
+        <h2 className="test-title">English Level Test (Proficient)</h2>
+
+        {questions.map((q, i) => (
+          <div key={i} className="question-block">
+            <p>{q.q}</p>
+            {q.options.map((opt, j) => (
+              <label key={j} className="option">
+                <input
+                  type="radio"
+                  name={`q-${i}`}
+                  value={opt}
+                  onChange={(e) => handleChange(i, e.target.value)}
+                />
+                {opt}
+              </label>
+            ))}
+          </div>
+        ))}
+
+        <button className="submit-btn" onClick={evaluateCEFR}>
+          Submit
+        </button>
+
+        {result !== null && (
+          <div className="result">
+            <p>Score: {result} / {questions.length}</p>
+          </div>
+        )}
       </div>
-    </div>
-  </header>
-    <div className="test-container">
-      
-      <h2 className="test-title">English Level Test (CEFR)</h2>
 
-      {questions.map((q, i) => (
-        <div key={i} className="question-block">
-          <p>{q.q}</p>
-          {q.options.map((opt, j) => (
-            <label key={j} className="option">
-              <input
-                type="radio"
-                name={`q-${i}`}
-                value={opt}
-                onChange={(e) => handleChange(i, e.target.value)}
-              />
-              {opt}
-            </label>
-          ))}
+      <footer id="contact" className="footer">
+        <div className="container">
+          <p>&copy; 2025 Mrakhmadjon IELTS Learning Center. All rights reserved.</p>
         </div>
-      ))}
-
-      <button className="submit-btn" onClick={evaluateCEFR}>
-        Submit
-      </button>
-
-      {result && (
-        <div className="result">
-          <p>
-            Score: {result.score} / {questions.length}
-          </p>
-          <p>Predicted Level: <strong>{result.level}</strong></p>
-        </div>
-      )}
-    </div>
-     <footer id="contact" className="footer">
-    <div className="container">
-      <p>&copy; 2025 Mrakhmadjon IELTS Learning Center. All rights reserved.</p>
-    </div>
-  </footer>
+      </footer>
     </div>
   );
 }

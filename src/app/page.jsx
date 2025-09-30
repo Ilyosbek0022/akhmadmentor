@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 
@@ -77,13 +78,13 @@ const websiteData = {
 
 
 const Header = () => (
-  <header className="header">
+  <header className="header sticky top-0 left-0 ">
     <div className="container">
       <div className="header-content">
         <a href="/">
         <div className="logo">
-          <div className="logo-icon">M</div>
-          <div className="logo-text">Mrakhmadjon IELTS</div>
+          <div className="logo-icon">Mr</div>
+          <div className="logo-text">Akhmadjon IELTS</div>
         </div></a>
         <nav className="nav">
           <ul>
@@ -92,6 +93,7 @@ const Header = () => (
             <li><a href="/test">Tests</a></li>
             <li><a href="/locate">Location</a></li>
             <li><a href="/contact">Contact</a></li>
+            <li><a href="/learn/glavniy">Learn</a></li>
           </ul>
         </nav>
       </div>
@@ -110,6 +112,7 @@ const HeroSection = () => (
           {websiteData.teacher.studentsTaught} students succeed
         </p>
         <a href="/price" className="btn">Explore Courses</a>
+        <a href="/learn/glavniy" className="btn">Study for free</a>
       </div>
     </div>
   </section>
@@ -125,7 +128,7 @@ const TeacherInfo = () => (
       </div>
       <div className="teacher-content">
         <div className="teacher-image">
-          <img src="/mallim.jpg" alt="Mrakhmadjon" />
+          <img src="/tutor.jpg" alt="Mrakhmadjon" />
         </div>
         <div className="teacher-details">
           <h3>{websiteData.teacher.name} - IELTS Specialist</h3>
@@ -153,9 +156,11 @@ const Courses = () => (
           <div key={index} className="course-card">
             <h3>{course.title}</h3>
             <p>{course.description}</p>
+          
             <div className="course-meta">
               <span>⏱️ {course.duration}</span>
-              <span>👤 {course.level}</span>
+              <span className='darajasi'>👤 {course.level}</span>
+                <Link href={'/price'}><button className='lkmn'>Check</button></Link>
             </div>
           </div>
         ))}

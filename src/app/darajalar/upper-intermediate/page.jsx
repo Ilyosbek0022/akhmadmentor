@@ -43,13 +43,13 @@ function TestCEFR() {
 
   return (
     <div className="all">
-       <header className="header">
+     <header className="header">
     <div className="container">
       <div className="header-content">
-         <a href="/">
+        <a href="/">
         <div className="logo">
-          <div className="logo-icon">M</div>
-          <div className="logo-text">Mrakhmadjon IELTS</div>
+          <div className="logo-icon">Mr</div>
+          <div className="logo-text">Akhmadjon IELTS</div>
         </div></a>
         <nav className="nav">
           <ul>
@@ -58,6 +58,7 @@ function TestCEFR() {
             <li><a href="/test">Tests</a></li>
             <li><a href="/locate">Location</a></li>
             <li><a href="/contact">Contact</a></li>
+            
           </ul>
         </nav>
       </div>

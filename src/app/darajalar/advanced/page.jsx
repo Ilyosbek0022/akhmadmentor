@@ -14,9 +14,6 @@ const questions = [
   { q: "10) Correct usage:", options: ["She insisted to pay.", "She insisted on paying.", "She insisted paying."], answer: "She insisted on paying." },
 ];
 
-
-
-
 function TestCEFR() {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
@@ -30,27 +27,18 @@ function TestCEFR() {
     questions.forEach((q, i) => {
       if (answers[i] === q.answer) score++;
     });
-
-    let level = "";
-    if (score <= 2) level = "A1 (Beginner)";
-    else if (score <= 4) level = "A2 (Elementary)";
-    else if (score <= 6) level = "B1 (Intermediate)";
-    else if (score <= 8) level = "B2 (Upper-Intermediate)";
-    else if (score === 9) level = "C1 (Advanced)";
-    else if (score === 10) level = "C2(ChatGpt)";
-
-    setResult({ score, level });
+    setResult({ score });
   };
 
   return (
     <div className="all">
-       <header className="header">
+    <header className="header">
     <div className="container">
       <div className="header-content">
-         <a href="/">
+        <a href="/">
         <div className="logo">
-          <div className="logo-icon">M</div>
-          <div className="logo-text">Mrakhmadjon IELTS</div>
+          <div className="logo-icon">Mr</div>
+          <div className="logo-text">Akhmadjon IELTS</div>
         </div></a>
         <nav className="nav">
           <ul>
@@ -59,6 +47,7 @@ function TestCEFR() {
             <li><a href="/test">Tests</a></li>
             <li><a href="/locate">Location</a></li>
             <li><a href="/contact">Contact</a></li>
+            
           </ul>
         </nav>
       </div>
@@ -66,7 +55,7 @@ function TestCEFR() {
   </header>
     <div className="test-container">
       
-      <h2 className="test-title">English Level Test (CEFR)</h2>
+      <h2 className="test-title">English Level Test (Advanced)</h2>
 
       {questions.map((q, i) => (
         <div key={i} className="question-block">
@@ -94,7 +83,6 @@ function TestCEFR() {
           <p>
             Score: {result.score} / {questions.length}
           </p>
-          <p>Predicted Level: <strong>{result.level}</strong></p>
         </div>
       )}
     </div>
