@@ -59,7 +59,7 @@ const A1Vocabulary = () => {
         </div>
       </header>
       <div className="learn-page">
-        <button className="lkmn">←orqaga</button> <h1 className="learn-title">A1 – Beginner Vocabulary </h1>
+        <a href="/learn/vocab"><button className="lkmn">←orqaga</button></a> <h1 className="learn-title">A1 – Beginner Vocabulary </h1>
 
         <div className="lesson-grid">
           {words.map((item) => (
@@ -74,8 +74,8 @@ const A1Vocabulary = () => {
               <h2>{item.word}</h2>
               {showMeaning[item.id] && (
                 <div className="mt-2 text-sm text-gray-700">
-                  <p><strong>Meaning:</strong> {item.meaning}</p>
-                  <p><strong>Example:</strong> {item.example}</p>
+                 <p className="fonstizeuchun"><strong>Meaning:</strong> {item.meaning}</p>
+                  <p className="fonstizeuchun"><strong>Example:</strong> {item.example}</p>
                 </div>
               )}
             </div>

@@ -59,7 +59,7 @@ const B1Vocabulary = () => {
         </div>
       </header>
       <div className="learn-page">
-    <button className="lkmn">←orqaga</button>     <h1 className="learn-title">B1 – Intermediate Vocabulary</h1>
+   <a href="/learn/vocab"><button className="lkmn">←orqaga</button></a>     <h1 className="learn-title">B1 – Intermediate Vocabulary</h1>
 
         <div className="lesson-grid">
           {words.map((item) => (

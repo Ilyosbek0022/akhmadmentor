@@ -12,7 +12,7 @@ const initialLessons = [
   // Skills
   { id: 3, title: "Passive voice", path: "/learn/speaking" },
   { id: 4, title: "Reported speeech", path: "/learn/writing" },
-  { id: 5, title: "", path: "/learn/listening" },
+  { id: 5, title: "Listening", path: "/learn/listening" },
   { id: 6, title: "To be to", path: "/learn/reading" },
 
   // Extras
@@ -55,7 +55,7 @@ const Learn = () => {
         <div className="lesson-grid">
           {lessons.map((lesson) => (
             <a key={lesson.id} href={lesson.path}>
-              <div className="lesson-card cursor-pointer">
+              <div className="lesson-card cursor-pointer "  id="gramglavniy">
                 
                 <div className="lesson-circle">
                   {lesson.title.charAt(0)}

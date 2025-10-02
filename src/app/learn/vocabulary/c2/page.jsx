@@ -76,7 +76,7 @@ const C2Vocabulary = () => {
               </div>
               <h2>{item.word}</h2>
               {showMeaning[item.id] && (
-                <div className="mt-2 text-sm text-gray-700">
+                <div className="mt-2 text-sm text-gray-700  fonstizeuchun">
                   <p><strong>Meaning:</strong> {item.meaning}</p>
                   <p><strong>Example:</strong> {item.example}</p>
                 </div>

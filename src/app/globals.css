@@ -1254,17 +1254,12 @@ textarea:focus {
 }
 
 /* Media qo‘shamiz */
-@media (max-width: 400px) {
-  .lesson-grid {
-    grid-template-columns: repeat(1, 1fr); /* faqat 2ta card */
-    gap: 1rem;
-  }
-}
 
 @media (min-width: 390px) {
   .lesson-grid {
     grid-template-columns: repeat(2, 1fr); /* faqat 2ta card */
     gap: 1rem;
+    
   }
   .learn-page{
     display: flex;
@@ -1272,6 +1267,7 @@ textarea:focus {
   }
   
 }
+
 @media (min-width: 600px) {
   .lesson-grid {
     grid-template-columns: repeat(2, 1fr); /* faqat 2ta card */
@@ -1290,4 +1286,241 @@ textarea:focus {
     gap: 1rem;
     padding: -90px;
   }
+}
+
+@media (max-width: 490px) {
+.lesson-card{
+  font-style: italic;
+  padding: -20px;
+  
+}
+.learn-grid{
+justify-content: center;
+}
+
+}
+@media (max-width: 350px) {
+  .lesson-grid {
+    grid-template-columns: repeat(2, 1fr);
+    
+    justify-content: center;
+  }
+  .header{
+    display: flex;
+  }
+
+
+}
+@media (max-width: 328px) {
+  .lesson-grid {
+    grid-template-columns: repeat(2, 1fr);
+    
+    justify-content: center;
+  }
+  .lesson-card{
+padding: 20px;
+width: fit-content;
+  }
+  .header{
+    display: flex;
+  }
+  
+
+
+}
+
+
+
+/* ========== Global styles ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Wrapper */
+.contact-wrapper {
+  width: 95%;
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 28px;
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  color: #fff;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  transition: padding 0.25s ease, max-width 0.25s ease;
+  overflow-x: auto; /* juda tor ekranlarda scroll paydo bo'lishi mumkin */
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.contact-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+.contact-header p {
+  color: #d1d5db;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+/* ===== Grid: HAR DOIM 2 USTUN ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* always 2 columns */
+  gap: 18px;
+}
+
+/* Agar xohlasangiz, .full ni ham 1 ustun emas 2 ustunga bo'linadigan qiling */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.learn-grid{
+  justify-content: center;
+}
+
+/* Agar siz haqiqatan ham ba'zi elementlarni keng qilishni hohlasangiz:
+   .form-field.full { grid-column: span 2; } deb o'zgartiring.
+   Hozir esa barcha maydonlar 2 ustun ichida turgan holda bitta katakni egallaydi. */
+.form-field.full {
+  grid-column: span 1; /* hamma maydonlar 2 ustunda (har biri bitta katak) */
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #e5e7eb;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+  border-color: #6366f1;
+  background: rgba(255,255,255,0.12);
+}
+
+/* Policy block */
+.policy-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  color: #e5e7eb;
+  grid-column: 1 / -1; /* checkbox blokini butun satrga cho'zadi (agar xohlansa) */
+}
+.policy-link { color: #6366f1; font-weight: 600; text-decoration: none; }
+.policy-link:hover { text-decoration: underline; }
+
+/* Submit */
+.form-submit {
+  margin-top: 12px;
+  grid-column: 1 / -1; /* tugma butun qator bo'lsin */
+}
+.form-submit button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg,#6366f1,#4f46e5);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.form-submit button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(79,70,229,0.28);
+}
+
+/* ===== Responsive: faqat paddings va shriftlarni moslaymiz, lekin 2 ustunni saqlaymiz ===== */
+@media (max-width: 900px) {
+  .contact-wrapper { padding: 20px; }
+  .form-grid { gap: 14px; }
+  .contact-header h2 { font-size: 1.85rem; }
+  input, textarea { font-size: 0.92rem; padding: 11px; }
+}
+
+@media (max-width: 480px) {
+  .contact-wrapper { padding: 12px; margin: 8px; }
+  .contact-header h2 { font-size: 1.4rem; }
+  .contact-header p { font-size: 0.82rem; }
+  input, textarea { font-size: 0.82rem; padding: 8px; }
+  .form-grid { gap: 10px; }
+  /* Eslatma: bu eng tor ekranlarda ham 2 ustun qoladi —
+     agar maydonlar juda tor ko'rinsa, brauzer horizontal scroll ko'rsatadi. */
+}
+
+@media (max-width: 327px) {
+
+.gramglavniy{
+  width: 250px;
+
+}
+
+
+  .lesson-card{
+padding: 20px;
+
+width: fit-content;
+  }
+  .lesson-grid{
+    gap: 20px;
+  }
+  .lesson-card{
+    max-width: 250px;
+    height: fit-content;
+    margin-top: 30px;
+    font-size: 30px;
+  }
+  .lesson-card p{
+    font-size: 19px;
+  }
+}
+
+.lesson-grid{
+  gap: 50px;
+}
+@media (max-width:420px) {
+  .header{
+    display: flex;
+
+  }
+
+   .lesson-grid {
+    grid-template-columns: repeat(1, 1fr);
+    
+    justify-content: center;
+  }
+  .lesson-grid{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 327px) {
+  .gramglavniy{
+  width: 250px;
+
+}
+
 }
