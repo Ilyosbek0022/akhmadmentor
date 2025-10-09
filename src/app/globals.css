@@ -1826,3 +1826,240 @@ input:focus, textarea:focus {
 .section{
   margin-top: 30px;
 }
+input{
+  color: black;
+}
+/* === RESPONSIVE PAGE FIX === */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  section {
+    padding: 2rem !important;
+  }
+
+  table {
+    font-size: 0.9rem !important;
+  }
+
+  input[type="text"] {
+    width: 90% !important;
+    font-size: 1rem !important;
+    padding: 0.8rem !important;
+  }
+
+  button {
+    width: 90% !important;
+    padding: 0.9rem !important;
+    font-size: 1rem !important;
+  }
+
+  ul li {
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  .text-lg {
+    font-size: 1rem !important;
+  }
+
+  .text-6xl {
+    font-size: 2rem !important;
+  }
+
+  .max-w-5xl {
+    max-width: 95% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header p {
+    font-size: 0.95rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  table th, table td {
+    padding: 0.5rem !important;
+  }
+
+  input[type="text"],
+  button {
+    width: 100% !important;
+  }
+
+  ul li {
+    font-size: 0.95rem !important;
+  }
+
+  .space-y-16 {
+    gap: 2rem !important;
+  }
+
+  .min-h-screen {
+    padding: 1rem !important;
+  }
+
+  section {
+    border-radius: 1rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.7rem !important;
+  }
+
+  h2 {
+    font-size: 1.2rem !important;
+  }
+
+  input[type="text"] {
+    font-size: 0.9rem !important;
+  }
+
+  button {
+    font-size: 0.9rem !important;
+  }
+
+  ul li {
+    font-size: 0.9rem !important;
+  }
+}
+/* Universal responsive fix for tense pages */
+
+
+/* Container balans */
+.min-h-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6rem; /* Navbar bilan to‘qnashmasin */
+}
+
+/* Title joylashuvi */
+h1 {
+  word-break: keep-all;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Text balansi */
+p, li {
+  line-height: 1.7;
+}
+
+/* Sectionlar orasida joy */
+section {
+  margin-top: 2.5rem;
+}
+
+/* Table scroll bo‘lishi uchun */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Input joyi markazda tursin */
+input[type="text"] {
+  width: 90%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Mobil uchun sozlama */
+@media (max-width: 480px) {
+  .min-h-screen {
+    padding-top: 8rem; /* Navbar pastga tushganda joy qoldiradi */
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p, li {
+    font-size: 0.95rem;
+  }
+
+  section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+  }
+}
+/* === Universal Responsive Fix for "dizayn1" pages === */
+
+/* Container centering */
+.min-h-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* Main card */
+.max-w-3xl {
+  width: 100%;
+  max-width: 90%;
+}
+
+/* Title sizing */
+h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.2;
+}
+
+/* Section spacing */
+section {
+  margin-top: 1.5rem;
+}
+
+/* Text readability */
+p, li {
+  line-height: 1.7;
+  font-size: clamp(0.95rem, 2.3vw, 1.1rem);
+}
+
+/* Table responsive */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Input fields */
+input[type="text"] {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Toast position fix for mobile */
+@media (max-width: 640px) {
+  .Toastify__toast-container {
+    bottom: 1rem !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+}

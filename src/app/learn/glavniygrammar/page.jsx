@@ -4,20 +4,21 @@ import React, { useState } from "react";
 
 const initialLessons = [
   // Vocabulary
-  { id: 1, title: "If conditional", path: "/learn/vocab" },
+  { id: 1, title: "If conditional", path: "/learn/ifcondition" },
 
   // Grammar
   { id: 2, title: "Zamonlar", path: "/learn/asospage" },
 
   // Skills
-  { id: 3, title: "Passive voice", path: "/learn/speaking" },
-  { id: 4, title: "Reported speeech", path: "/learn/writing" },
-  { id: 5, title: "Listening", path: "/learn/listening" },
-  { id: 6, title: "To be to", path: "/learn/reading" },
+  { id: 3, title: "Passive voice", path: "/learn/passive" },
+  { id: 4, title: "Reported speeech", path: "/learn/reportedspeech" },
+  { id: 5, title: "article", path: "/learn/article" },
+  { id: 6, title: "To be to", path: "/learn/tobeto" },
 
   // Extras
-  { id: 7, title: "Tests", path: "/learn/tests" },
-  { id: 8, title: "Practice", path: "/learn/practice" },
+  { id: 7, title: "Predlog", path: "/learn/predlog" },
+  { id: 8, title: "Tests", path: "/learn/testsas" },
+  
 ];
 
 const Learn = () => {
