@@ -195,7 +195,16 @@ const IfConditionalsPage = () => {
           )}
         </section>
       </div>
-      <ToastContainer position="top-center" />
+      <ToastContainer
+  position="top-center"
+  style={{
+    width: "auto",
+    maxWidth: "220px",
+    maxHeight: "120px",
+    margin: "0 auto",
+  }}
+/>
+
     </div>
     </div>
   );
