@@ -14,6 +14,7 @@ const initialLessons = [
   { id: 4, title: "Writing", path: "/learn/writing" }, 
   { id: 5, title: "Listening", path: "/learn/listening" },
   { id: 6, title: "Reading", path: "/learn/reading" },
+  { id: 7, title: "Formulalar", path: "/learn/formulalar" },
 
   
   

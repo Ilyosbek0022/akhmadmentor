@@ -2159,3 +2159,117 @@ button {
 }
 
 
+
+.turtiyuziturt{
+  color: black;
+}
+
+
+
+
+
+.main-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* ===== Test Card ===== */
+.test-card {
+  background-color: #2a2a2a;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.test-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+}
+
+.test-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  color: #6366f1;
+}
+
+/* ===== Premium Radio Buttons ===== */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  border: 2px solid #4b4b4b;
+  transition: all 0.3s;
+  background-color: #1f1f1f;
+}
+
+.radio-group input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #6366f1; /* indigo */
+  cursor: pointer;
+}
+
+.radio-group label:hover {
+  border-color: #6366f1;
+  background-color: #292929;
+}
+
+.radio-group input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: #6366f1;
+}
+
+.correct-answer {
+  border-color: #22c55e !important; /* green */
+  background-color: #163f2e !important;
+  color: #a7f3d0 !important;
+}
+
+.wrong-answer {
+  border-color: #ef4444 !important; /* red */
+  background-color: #4b1f1f !important;
+  color: #fca5a5 !important;
+}
+
+/* ===== Submit Button ===== */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  transition: all 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.7);
+}
+
+/* ===== Result ===== */
+.result {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6366f1;
+  margin-top: 2rem;
+}

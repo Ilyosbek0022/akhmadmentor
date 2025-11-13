@@ -78,7 +78,7 @@ const websiteData = {
 
 
 const Header = () => (
-  <header className="header sticky top-0 left-0 ">
+  <header className="header static top-0 left-0 ">
     <div className="container">
       <div className="header-content">
         <a href="/">
