@@ -2273,3 +2273,50 @@ button {
   color: #6366f1;
   margin-top: 2rem;
 }
+.sliderprnt{
+  display: flex;
+  justify-content:center;
+  
+}
+.sliderprnt div{
+  display:flex;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+}
+
+.sliderprnt {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.sliderprnt div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.slider {
+  background: linear-gradient(135deg, #007bff, #00c4ff);
+  border: none;
+  color: white;
+  font-size:2.6rem; /* arrow kattaligi */
+  width: 120px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;   /* vertikal markaz */
+  justify-content: center; /* gorizontal markaz */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  line-height: 0; /* arrow atrofidagi ortiqcha bo‘sh joyni yo‘q qiladi */
+}
+
+.slider:hover {
+  transform: scale(1.15);
+  background: linear-gradient(135deg, #0056d6, #0097e6);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}

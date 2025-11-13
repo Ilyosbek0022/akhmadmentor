@@ -5,6 +5,14 @@ import React from "react";
 const page = () => {
   const database = {
     courses: [
+        {
+        title: "Entry Test",
+        description:
+          "Lets test your English level",
+        level: "A1-C2",
+        TestAmount: "50",
+        link: "/darajalar/entry",
+      },
       {
         title: "A1 – Beginner",
         description:
