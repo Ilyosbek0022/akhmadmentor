@@ -2320,3 +2320,138 @@ button {
   background: linear-gradient(135deg, #0056d6, #0097e6);
   box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+body, .page {
+  background: #0a0a0a;
+  color: #eaeaea;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* === CONTAINER === */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* === HEADER === */
+.header {
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #222;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  background: linear-gradient(135deg, #007aff, #00e0ff);
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #ccc;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.nav a:hover {
+  color: #00c6ff;
+}
+
+/* === COURSES SECTION === */
+.section-title {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 28px;
+  color: #00b4ff;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  font-size: 15px;
+  color: #bbb;
+}
+
+
+
+
+
+.course-meta .price {
+  color: #00e0ff;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.btn-contact {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #007aff, #00e0ff);
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+  background: linear-gradient(135deg, #00e0ff, #007aff);
+  transform: scale(1.05);
+}
+
+/* === FOOTER === */
+.footer {
+  background: #0f0f0f;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #1a1a1a;
+  color: #777;
+  font-size: 14px;
+}
