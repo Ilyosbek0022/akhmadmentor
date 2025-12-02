@@ -42,6 +42,7 @@ function TestCEFR50() {
             <nav className="nav">
               <ul>
                 <li><a href="/">Home</a></li>
+                
                 <li><a href="/price">Price</a></li>
                 <li><a href="/test">Tests</a></li>
                 <li><a href="/locate">Location</a></li>

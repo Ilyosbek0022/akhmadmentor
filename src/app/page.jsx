@@ -94,6 +94,7 @@ const Header = () => (
             <li><a href="/locate">Location</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/learn/glavniy">Learn</a></li>
+            <li><a href="/learn/gemini">GEMINI AI</a></li>
           </ul>
         </nav>
       </div>
