@@ -1345,6 +1345,7 @@ width: fit-content;
   max-width: 1000px;
   margin: 24px auto;
   padding: 28px;
+  
   -webkit-backdrop-filter: blur(12px);
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.08);
