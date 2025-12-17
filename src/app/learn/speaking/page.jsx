@@ -59,12 +59,14 @@ export default function SpeakingPage() {
   const [timers, setTimers] = useState({})
   const [texts, setTexts] = useState({})
   const [logs, setLogs] = useState([])
-const [audios, setAudios] = useState({})
+  const [audios, setAudios] = useState({})
 
   const recognitionRef = useRef({})
 
   /* ---------- Speech Recognition ---------- */
   useEffect(() => {
+    if (typeof window === 'undefined') return // serverda ishlamasin
+
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
     if (!SR) return
 
@@ -125,23 +127,26 @@ const [audios, setAudios] = useState({})
 
   /* ---------- RECORDING ---------- */
   const startRecording = async id => {
+    if (typeof window === 'undefined') return
     await startRec()
     recognitionRef.current[id]?.start()
     setLogs(l => [...l, `Task ${id}: recording started`])
   }
-const stopRecording = async id => {
-  const blob = await stopRec()
-  recognitionRef.current[id]?.stop()
 
-  const url = URL.createObjectURL(blob)
+  const stopRecording = async id => {
+    if (typeof window === 'undefined') return
+    const blob = await stopRec()
+    recognitionRef.current[id]?.stop()
 
-  setAudios(a => ({ ...a, [id]: url }))
-  setLogs(l => [...l, `Task ${id}: recording finished`])
+    const url = URL.createObjectURL(blob)
 
-  setTimers(t => ({ ...t, [id]: { ...t[id], running: false } }))
-}
+    setAudios(a => ({ ...a, [id]: url }))
+    setLogs(l => [...l, `Task ${id}: recording finished`])
 
+    setTimers(t => ({ ...t, [id]: { ...t[id], running: false } }))
+  }
 
+  /* ---------- START TASK ---------- */
   const startPart = p => {
     setTexts(t => ({ ...t, [p.id]: '' }))
     setTimers(t => ({
@@ -155,7 +160,9 @@ const stopRecording = async id => {
     }))
   }
 
+  /* ---------- COPY TEXT ---------- */
   const copyText = async id => {
+    if (typeof navigator === 'undefined') return // serverda ishlamasin
     if (!texts[id]) return
     await navigator.clipboard.writeText(texts[id])
     setLogs(l => [...l, `Task ${id}: text copied`])
@@ -195,12 +202,11 @@ const stopRecording = async id => {
             <button onClick={() => startPart(p)}>Start</button>
             <button onClick={() => stopRecording(p.id)}>Stop</button>
             {audios[p.id] && (
-  <div className="voice">
-    <p className="voice-title">🎙 Your recorded answer</p>
-    <audio controls src={audios[p.id]} />
-  </div>
-)}
-
+              <div className="voice">
+                <p className="voice-title">🎙 Your recorded answer</p>
+                <audio controls src={audios[p.id]} />
+              </div>
+            )}
           </div>
 
           <p className="timer">
@@ -232,220 +238,181 @@ const stopRecording = async id => {
 
       {/* ---------- STYLES ---------- */}
       <style jsx>{`
-/* ===== Premium SpeakingPage Styles (RWD + Audio Player) ===== */
-
-.wrap {
-  max-width: 1080px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: 'Inter', sans-serif;
-  color: #e5e7eb;
-  background: radial-gradient(circle at top, #0b0f14, #020617);
-}
-
-.wrap h1 {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  color: #a5f3fc;
-  text-shadow: 0 2px 8px rgba(34,197,94,0.5);
-}
-
-/* ===== CARD ===== */
-.card {
-  background: linear-gradient(145deg, #0c1118, #0a0d14);
-  border-radius: 22px;
-  padding: 28px;
-  border: 1px solid rgba(34,197,94,0.3);
-  box-shadow: 0 20px 40px rgba(0,255,127,0.15);
-  margin-bottom: 30px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(34,197,94,0.35);
-}
-
-.badge {
-  display: inline-block;
-  background: rgba(34,197,94,0.12);
-  color: #22c55e;
-  border: 1px solid rgba(34,197,94,0.35);
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-}
-
-/* ===== BUTTONS ===== */
-.btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.btns button {
-  flex: 1 1 100px;
-  height: 40px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btns button:first-child {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #0f1114;
-  box-shadow: 0 5px 15px rgba(34,197,94,0.3);
-}
-
-.btns button:first-child:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 25px rgba(34,197,94,0.4);
-}
-
-.btns button:last-child {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #e5e7eb;
-}
-
-.btns button:last-child:hover {
-  background: rgba(34,197,94,0.1);
-}
-
-/* ===== AUDIO PLAYER ===== */
-.voice {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.voice-title {
-  font-size: 0.85rem;
-  color: #22c55e;
-  font-weight: 600;
-}
-
-.voice audio {
-  width: 100%;
-  border-radius: 12px;
-  outline: none;
-  background: rgba(0,0,0,0.25);
-  box-shadow: 0 4px 15px rgba(34,197,94,0.25);
-}
-
-/* ===== TIMER ===== */
-.timer {
-  margin-top: 14px;
-  font-size: 0.85rem;
-  color: #9ca3af;
-  letter-spacing: 0.4px;
-}
-
-/* ===== TEXTAREA ===== */
-textarea {
-  margin-top: 14px;
-  width: 100%;
-  min-height: 100px;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(34,197,94,0.3);
-  background: rgba(0,0,0,0.35);
-  color: #e5e7eb;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
-}
-
-textarea:focus {
-  outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 8px rgba(34,197,94,0.4);
-}
-
-/* ===== COPY BUTTON ===== */
-.copy {
-  margin-top: 14px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #0f1114;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  box-shadow: 0 6px 20px rgba(34,197,94,0.35);
-  transition: all 0.25s ease;
-}
-
-.copy:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(34,197,94,0.5);
-}
-
-/* ===== LOG ===== */
-.log {
-  background: rgba(0,0,0,0.45);
-  border-radius: 18px;
-  padding: 20px;
-  border: 1px solid rgba(34,197,94,0.2);
-  box-shadow: 0 10px 30px rgba(0,255,127,0.15);
-}
-
-.log h3 {
-  margin-bottom: 12px;
-  color: #22c55e;
-}
-
-.log pre {
-  font-size: 0.85rem;
-  color: #9ca3af;
-  padding: 6px 0;
-  border-bottom: 1px dashed rgba(34,197,94,0.2);
-}
-
-/* ===== CUE ===== */
-.cue {
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 16px;
-  background: linear-gradient(145deg, rgba(34,197,94,0.05), rgba(0,0,0,0.3));
-  border: 1px dashed rgba(34,197,94,0.4);
-}
-
-/* ===== LISTS ===== */
-ul, ol {
-  margin: 14px 0;
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-  color: #d1d5db;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .btns {
-    flex-direction: column;
-  }
-
-  .btns button {
-    width: 100%;
-  }
-}
-`}</style>
-
-
+        /* ===== Premium SpeakingPage Styles (RWD + Audio Player) ===== */
+        .wrap {
+          max-width: 1080px;
+          margin: 40px auto;
+          padding: 0 20px;
+          font-family: 'Inter', sans-serif;
+          color: #e5e7eb;
+          background: radial-gradient(circle at top, #0b0f14, #020617);
+        }
+        .wrap h1 {
+          text-align: center;
+          margin-bottom: 40px;
+          font-size: 2.6rem;
+          font-weight: 800;
+          letter-spacing: 0.6px;
+          color: #a5f3fc;
+          text-shadow: 0 2px 8px rgba(34,197,94,0.5);
+        }
+        .card {
+          background: linear-gradient(145deg, #0c1118, #0a0d14);
+          border-radius: 22px;
+          padding: 28px;
+          border: 1px solid rgba(34,197,94,0.3);
+          box-shadow: 0 20px 40px rgba(0,255,127,0.15);
+          margin-bottom: 30px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 25px 50px rgba(34,197,94,0.35);
+        }
+        .badge {
+          display: inline-block;
+          background: rgba(34,197,94,0.12);
+          color: #22c55e;
+          border: 1px solid rgba(34,197,94,0.35);
+          padding: 6px 16px;
+          border-radius: 999px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.6px;
+        }
+        .btns {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 20px;
+        }
+        .btns button {
+          flex: 1 1 100px;
+          height: 40px;
+          border-radius: 999px;
+          font-weight: 700;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .btns button:first-child {
+          background: linear-gradient(135deg, #22c55e, #16a34a);
+          color: #0f1114;
+          box-shadow: 0 5px 15px rgba(34,197,94,0.3);
+        }
+        .btns button:first-child:hover {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 10px 25px rgba(34,197,94,0.4);
+        }
+        .btns button:last-child {
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #e5e7eb;
+        }
+        .btns button:last-child:hover {
+          background: rgba(34,197,94,0.1);
+        }
+        .voice {
+          margin-top: 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .voice-title {
+          font-size: 0.85rem;
+          color: #22c55e;
+          font-weight: 600;
+        }
+        .voice audio {
+          width: 100%;
+          border-radius: 12px;
+          outline: none;
+          background: rgba(0,0,0,0.25);
+          box-shadow: 0 4px 15px rgba(34,197,94,0.25);
+        }
+        .timer {
+          margin-top: 14px;
+          font-size: 0.85rem;
+          color: #9ca3af;
+          letter-spacing: 0.4px;
+        }
+        textarea {
+          margin-top: 14px;
+          width: 100%;
+          min-height: 100px;
+          padding: 14px;
+          border-radius: 16px;
+          border: 1px solid rgba(34,197,94,0.3);
+          background: rgba(0,0,0,0.35);
+          color: #e5e7eb;
+          font-size: 0.95rem;
+          line-height: 1.5;
+          transition: all 0.25s ease;
+          backdrop-filter: blur(8px);
+        }
+        textarea:focus {
+          outline: none;
+          border-color: #22c55e;
+          box-shadow: 0 0 8px rgba(34,197,94,0.4);
+        }
+        .copy {
+          margin-top: 14px;
+          width: 100%;
+          padding: 12px;
+          border-radius: 20px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          color: #0f1114;
+          background: linear-gradient(135deg, #22c55e, #16a34a);
+          box-shadow: 0 6px 20px rgba(34,197,94,0.35);
+          transition: all 0.25s ease;
+        }
+        .copy:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 10px 30px rgba(34,197,94,0.5);
+        }
+        .log {
+          background: rgba(0,0,0,0.45);
+          border-radius: 18px;
+          padding: 20px;
+          border: 1px solid rgba(34,197,94,0.2);
+          box-shadow: 0 10px 30px rgba(0,255,127,0.15);
+        }
+        .log h3 {
+          margin-bottom: 12px;
+          color: #22c55e;
+        }
+        .log pre {
+          font-size: 0.85rem;
+          color: #9ca3af;
+          padding: 6px 0;
+          border-bottom: 1px dashed rgba(34,197,94,0.2);
+        }
+        .cue {
+          margin-top: 18px;
+          padding: 18px;
+          border-radius: 16px;
+          background: linear-gradient(145deg, rgba(34,197,94,0.05), rgba(0,0,0,0.3));
+          border: 1px dashed rgba(34,197,94,0.4);
+        }
+        ul, ol {
+          margin: 14px 0;
+          padding-left: 20px;
+        }
+        li {
+          margin-bottom: 8px;
+          line-height: 1.5;
+          color: #d1d5db;
+        }
+        @media (max-width: 768px) {
+          .btns {
+            flex-direction: column;
+          }
+          .btns button {
+            width: 100%;
+          }
+        }
+      `}</style>
     </div>
   )
 }
