@@ -161,7 +161,7 @@ const Courses = () => (
             <div className="course-meta">
               <span>⏱️ {course.duration}</span>
               <span className='darajasi'>👤 {course.level}</span>
-                <Link href={'/price'}><button className='lkmn'>Check</button></Link>
+                <Link href={'/price'}><button className='lkmn'>Learn more </button></Link>
             </div>
           </div>
         ))}

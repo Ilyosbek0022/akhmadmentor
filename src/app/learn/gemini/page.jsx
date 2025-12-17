@@ -40,6 +40,30 @@ export default function GeminiPage() {
   };
 
   return (
+    <div className="all">
+      <header className="header static top-0 left-0 ">
+    <div className="container">
+      <div className="header-content">
+        <a href="/">
+        <div className="logo">
+          <div className="logo-icon">Mr</div>
+          <div className="logo-text">Akhmadjon IELTS</div>
+        </div></a>
+        <nav className="nav">
+          <ul>
+                   <li><a href="/">Home</a></li>
+            <li><a href="/price">Price</a></li>
+            <li><a href="/test">Tests</a></li>
+            <li><a href="/locate">Location</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/learn/glavniy">Learn</a></li>
+            <li><a href="/learn/gemini">GEMINI AI</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+    
     <div
       style={{
         padding: "20px",
@@ -48,6 +72,7 @@ export default function GeminiPage() {
         fontFamily: "sans-serif",
       }}
     >
+      
       <h2>🤖 Gemini API — Chat</h2>
 
       <textarea
@@ -82,6 +107,7 @@ export default function GeminiPage() {
         <strong>Response:</strong>
         <p>{loading ? "Yuklanmoqda..." : response}</p>
       </div>
+    </div>
     </div>
   );
 }

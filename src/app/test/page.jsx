@@ -91,7 +91,7 @@ const page = () => {
                 <li><a href="/test">Tests</a></li>
                 <li><a href="/locate">Location</a></li>
                 <li><a href="/contact">Contact</a></li>
-                <li><a href="/learn/asospage">Learn</a></li>
+                  <li><a href="/learn/glavniy">Learn</a></li>
               </ul>
             </nav>
           </div>

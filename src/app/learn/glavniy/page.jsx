@@ -1,23 +1,15 @@
 'use client'
 import React, { useState } from "react";
 
-
 const initialLessons = [
-  // Vocabulary
-  { id: 1, title: "Vocabulary", path: "/learn/vocab" },
+  { id: 1, title: "Vocabulary", path: "/learn/vocab", checked: true },
+  { id: 2, title: "Grammar", path: "/learn/glavniygrammar", checked: true },
 
-  // Grammar
-  { id: 2, title: "Grammar", path: "/learn/glavniygrammar" },
-
-  // Skills
   { id: 3, title: "Speaking", path: "/learn/speaking" },
   { id: 4, title: "Writing", path: "/learn/writing" }, 
   { id: 5, title: "Listening", path: "/learn/listening" },
   { id: 6, title: "Reading", path: "/learn/reading" },
   { id: 7, title: "Formulalar", path: "/learn/formulalar" },
-
-  
-  
 ];
 
 const Learn = () => {
@@ -41,7 +33,6 @@ const Learn = () => {
                 <li><a href="/test">Tests</a></li>
                 <li><a href="/locate">Location</a></li>
                 <li><a href="/contact">Contact</a></li>
-                
                 <li><a href="/learn/glavniy">Learn</a></li>
               </ul>
             </nav>
@@ -56,10 +47,16 @@ const Learn = () => {
           {lessons.map((lesson) => (
             <a key={lesson.id} href={lesson.path}>
               <div className="lesson-card cursor-pointer">
-                
+
+                {/* iOS style ACTIVE Badge */}
+                {lesson.checked && (
+                  <div className="ios-active-dot"></div>
+                )}
+
                 <div className="lesson-circle">
                   {lesson.title.charAt(0)}
                 </div>
+
                 <h2>{lesson.title}</h2>
               </div>
             </a>
