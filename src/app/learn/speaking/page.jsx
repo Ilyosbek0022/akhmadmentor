@@ -170,7 +170,33 @@ export default function SpeakingPage() {
 
   /* ---------- UI ---------- */
   return (
+    <div className="all">
+      
+      <header className="header forheight">
+        <div className="container">
+          <div className="header-content">
+            <a href="/">
+              <div className="logo">
+                <div className="logo-icon">M</div>
+                <div className="logo-text"> Mrakhmadjon IELTS</div>
+              </div>
+            </a>
+            <nav className="nav">
+              <ul>
+                <li><a href="/">Home</a></li>
+                
+                <li><a href="/test">Tests</a></li>
+                
+                
+                <li><a href="/learn/asospage">Learn</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
     <div className="wrap">
+      
       <h1>CEFR Speaking Practice</h1>
 
       {PARTS.map(p => (
@@ -235,7 +261,7 @@ export default function SpeakingPage() {
           <pre key={i}>{l}</pre>
         ))}
       </div>
-
+</div>
       {/* ---------- STYLES ---------- */}
       <style jsx>{`
         /* ===== Premium SpeakingPage Styles (RWD + Audio Player) ===== */

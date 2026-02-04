@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import Footer from '../learn/footer'
+import Header from '../learn/header'
 
 const Page = () => {
   const database = {
@@ -22,8 +24,8 @@ const Page = () => {
         link: "/contact",
       },
       {
-        title: "Intensive Crash Course",
-        description: "Fast-track preparation for upcoming tests.",
+        title: "Intensive Multilevel Course",
+        description: "B1 to B2,B2 to C1 level improvement in a short time.",
         duration: "4 weeks",
         level: "Advanced",
         price: "250K sum",
@@ -59,28 +61,7 @@ const Page = () => {
   return (
     <div>
       {/* === HEADER === */}
-      <header className="header">
-        <div className="container">
-          <div className="header-content">
-            <a href="/">
-              <div className="logo">
-                <div className="logo-icon">Mr</div>
-                <div className="logo-text">Akhmadjon IELTS</div>
-              </div>
-            </a>
-            <nav className="nav">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/price">Price</a></li>
-                <li><a href="/test">Tests</a></li>
-                <li><a href="/locate">Location</a></li>
-                <li><a href="/contact">Contact</a></li>
-                  <li><a href="/learn/glavniy">Learn</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+     <Header/>
 
       {/* === COURSES SECTION === */}
       <section id="courses" className="courses-section">
@@ -112,11 +93,7 @@ const Page = () => {
       </section>
 
       {/* === FOOTER === */}
-      <footer className="footer">
-        <div className="container">
-          <p>© 2025 MrAkhmadjon IELTS Learning Center. All rights reserved.</p>
-        </div>
-      </footer>
+     <Footer/>
     </div>
   )
 }

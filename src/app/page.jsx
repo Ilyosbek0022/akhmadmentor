@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const websiteData = {
@@ -46,12 +46,12 @@ const websiteData = {
     },
     {
       name: "Islom",
-      score: "IELTS 7.0",
+      score: "IELTS 8.0",
       text: "The speaking practice sessions were incredibly helpful. I gained so much confidence."
     },
     {
       name: "Sardor",
-      score: "IELTS 6.5",
+      score: "IELTS 7.5",
       text: "I never thought I could get this score. The teacher's strategies really work."
     },
     {
@@ -61,7 +61,7 @@ const websiteData = {
     },
     {
       name: "Intizor",
-      score: "IELTS 6.5",
+      score: "IELTS 7.5",
       text: "The practice tests and feedback made me feel fully prepared for the real IELTS exam."
     },{
       name: "Oybek",
@@ -78,23 +78,25 @@ const websiteData = {
 
 
 const Header = () => (
+  
   <header className="header static top-0 left-0 ">
     <div className="container">
       <div className="header-content">
-        <a href="/">
+   
+        <Link href="/">
         <div className="logo">
           <div className="logo-icon">Mr</div>
           <div className="logo-text">Akhmadjon IELTS</div>
-        </div></a>
+        </div></Link>
         <nav className="nav">
           <ul>
-                   <li><a href="/">Home</a></li>
-            <li><a href="/price">Price</a></li>
-            <li><a href="/test">Tests</a></li>
-            <li><a href="/locate">Location</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/learn/glavniy">Learn</a></li>
-            <li><a href="/learn/gemini">GEMINI AI</a></li>
+                   <li><Link href="/">Home</Link></li>
+            <li><Link href="/price">Price</Link></li>
+            <li><Link href="/test">Tests</Link></li>
+            <li><Link href="/locate">Location</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/learn/glavniy">Learn</Link></li>
+            <li><Link href="/learn/gemini">GEMINI AI</Link></li>
           </ul>
         </nav>
       </div>
@@ -112,8 +114,8 @@ const HeroSection = () => (
           Professional IELTS preparation with a certified instructor who has helped over{" "}
           {websiteData.teacher.studentsTaught} students succeed
         </p>
-        <a href="/price" className="btn">Explore Courses</a>
-        <a href="/learn/glavniy" className="btn">Study for free</a>
+        <Link href="/price" className="btn">Explore Courses</Link>
+        <Link href="/learn/glavniy" className="btn">Study for free</Link>
       </div>
     </div>
   </section>
@@ -222,6 +224,7 @@ const Footer = () => (
 
 
 const App = () => (
+ 
   <div className="app">
     <Header />
     <HeroSection />
@@ -231,6 +234,7 @@ const App = () => (
     <MapSection />
     <Footer />
   </div>
+
 );
 
 export default App;

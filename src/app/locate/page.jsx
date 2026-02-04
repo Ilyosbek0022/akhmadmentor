@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../learn/footer";
 
 
 const Page = () => {
@@ -62,11 +63,7 @@ const Page = () => {
 
 
       <ToastContainer theme="dark" position="top-left" />
-       <footer id="contact" className="footer">
-    <div className="container">
-      <p>&copy; 2025 Mrakhmadjon IELTS Learning Center. All rights reserved.</p>
-    </div>
-  </footer>
+     <Footer/>
     </div>
   );
 };

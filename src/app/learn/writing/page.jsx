@@ -1,208 +1,126 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
+'use client'
+import React, { useState } from "react";
+import { toast } from "react-toastify"; // toastify import
 
+// 10 exercises uchun words va answers (shu 10ta bo‘shliq misol tariqasida birinchi exercise bilan)
+const exercises = [
+  {
+    words: ["because", "but", "didn’t like", "enjoy", "favourite", "for", "fun", "like", "so", "started"],
+    correct: ["favourite","for","like","but","started","so","enjoy","fun","didn’t like","because"],
+    paragraph: `Table tennis is my __1__ hobby. I play it with my cousin at the sports centre near my house. We practise __2__ one or two hours three days a week. We sometimes play other sports, __3__ basketball or volleyball, __4__ I prefer table tennis. I __5__ playing table tennis two years ago. My cousin showed me how to play, and I loved it, __6__ I wanted to learn more. At first, it was a bit difficult, __7__ practised a lot and got better. Now I sometimes play in competitions. I __8__ playing table tennis because it’s __9__ and it’s important to do exercise. I tried other sports, like swimming and football, but I __10__ them. I prefer table tennis because it’s exciting, and you can learn it quickly.`
+  },
+  // 9 ta mashqlar uchun xuddi shu formatda qo‘shamiz...
+];
 
+const Exercises = () => {
+  const [current, setCurrent] = useState(0);
+  const [answers, setAnswers] = useState(Array(exercises[current].correct.length).fill(""));
+  const [checked, setChecked] = useState(false);
 
-export default function NotFound() {
+  const handleChange = (index, value) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = value;
+    setAnswers(newAnswers);
+    if (checked) setChecked(false);
+  };
+
+  const checkAnswers = () => {
+    setChecked(true);
+    const correctAnswers = exercises[current].correct;
+    const results = answers.map((ans, i) => ans.trim().toLowerCase() === correctAnswers[i].toLowerCase());
+    const correctCount = results.filter(Boolean).length;
+
+    // 5/6 yoki undan ko'p bo'lsa hooray toast
+    if(correctCount >= Math.ceil(correctAnswers.length * 5 / 6)){
+      toast.success("🎉 Hooray! Siz juda zo‘r ishladingiz!");
+    }
+
+    alert(
+      `Natija: ${correctCount}/${correctAnswers.length}\n\n` +
+      results.map((res, i) => `Bo'shliq ${i + 1}: ${res ? "✅ To'g'ri" : "❌ Noto'g'ri"}`).join("\n")
+    );
+  };
+
+  const nextExercise = () => {
+    if(current < exercises.length - 1){
+      setCurrent(current + 1);
+      setAnswers(Array(exercises[current+1].correct.length).fill(""));
+      setChecked(false);
+    } else {
+      toast.info("Siz barcha mashqlarni tugatdingiz!");
+    }
+  };
+
+  const getSelectClass = (index) => {
+    if(!checked) return "";
+    const userAns = answers[index]?.trim().toLowerCase();
+    const correct = exercises[current].correct[index].toLowerCase();
+    if(userAns === correct) return "border-green-500 bg-green-50 text-green-800";
+    if(userAns && userAns !== correct) return "border-red-500 bg-red-50 text-red-800";
+    return "";
+  };
+
+  const { words, paragraph, correct } = exercises[current];
+
   return (
-    <div className="notfound-root">
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 90, damping: 14 }}
-        className="card"
-      >
-        <div className="visual">
-          <h1 className="code404">
-            <motion.span
-              initial={{ rotate: -6, scale: 0.98 }}
-              animate={{ rotate: 6, scale: 1 }}
-              transition={{ repeat: Infinity, repeatType: "reverse", duration: 4 }}
-            >
-              <h2 className="turtiyuziturt">404</h2>
-            </motion.span>
-          </h1>
-          <svg className="orb" viewBox="0 0 200 200" aria-hidden>
-            <defs>
-              <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
-                <stop offset="0%" stopColor="#4FD1C5" />
-                <stop offset="100%" stopColor="#667EEA" />
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="78" stroke="url(#g)" strokeWidth="2" fill="none" strokeDasharray="6 6" />
-          </svg>
+    <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-blue-50 py-10 px-4 forex"  >
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+
+        {/* Header */}
+        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 px-8 py-10 text-white">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Exercise {current+1} / {exercises.length}</h1>
+          <p className="text-indigo-100 text-lg">
+            Bo‘shliqlarni to‘ldiring va javoblaringizni tekshiring!
+          </p>
         </div>
 
-        <div className="content">
-          <h2 className="title">Sahifa topilmadi</h2>
-          <p className="desc">Siz qidirgan sahifa hozircha mavjud emas yoki boshqa joyga ko'chirilgan. Biz bu ustida ishlayapmiz.</p>
-
-          <div className="actions">
-            <Link href="/" className="btn primary">
-              Bosh sahifaga qaytish
-            </Link>
-
-            <button
-              className="btn ghost"
-              onClick={() =>
-                alert("Xatolik haqidagi ma'lumot qabul qilindi. Biz bilan bog'laning yoki keyinroq qayta urinib ko'ring.")
-              }
-            >
-              Xatolikni bildirish
-            </button>
+        {/* Words box */}
+        <div className="p-6 md:p-8 border-b border-gray-200 bg-gray-50">
+          <h2 className="text-lg font-semibold text-gray-700 mb-3">Foydalaniladigan so‘zlar:</h2>
+          <div className="flex flex-wrap gap-3">
+            {words.map((word) => (
+              <span key={word} className="px-4 py-2 bg-white border border-indigo-200 rounded-full text-indigo-700 font-medium shadow-sm hover:shadow-md transition-shadow">
+                {word}
+              </span>
+            ))}
           </div>
-
-          <p className="hint">Agar siz saytdagi muhandis bo'lsangiz — iltimos konsolni tekshiring va <code>/app/not-found.jsx</code> faylini ko'rib chiqing.</p>
         </div>
-      </motion.section>
 
-      <style jsx>{`
-        :root{
-          --bg:#0b1020;
-          --card:#0f1724;
-          --muted:#9ca3af;
-          --accent1:#4FD1C5;
-          --accent2:#667EEA;
-          --glass: rgba(255,255,255,0.04);
-        }
+        {/* Main content */}
+        <div className="p-6 md:p-10 space-y-10 text-gray-800">
+          {correct.map((_, i) => (
+            <select
+              key={i}
+              onChange={(e) => handleChange(i, e.target.value)}
+              value={answers[i]}
+              className={`inline-block min-w-[140px] px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${getSelectClass(i)}`}
+            >
+              <option value="">tanlang...</option>
+              {words.map((word) => <option key={word} value={word}>{word}</option>)}
+            </select>
+          ))}
+        </div>
 
-        .notfound-root{
-          min-height:100vh;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          background: radial-gradient(1200px 600px at 10% 10%, rgba(102,126,234,0.08), transparent 8%),
-                      radial-gradient(1000px 500px at 90% 90%, rgba(79,209,197,0.06), transparent 8%),
-                      var(--bg);
-          padding:40px 20px;
-          font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-          color: #eef2ff;
-        }
+        {/* Footer */}
+        <div className="px-8 py-6 bg-gray-50 border-t flex flex-col sm:flex-row items-center justify-between gap-4">
+          <button
+            onClick={checkAnswers}
+            disabled={answers.every(a => !a.trim())}
+            className="w-full sm:w-auto px-8 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+          >
+            Javoblarni tekshirish
+          </button>
 
-        .card{
-          width:100%;
-          max-width:1100px;
-          display:grid;
-          grid-template-columns: 1fr 1fr;
-          gap:32px;
-          align-items:center;
-          background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-          border:1px solid rgba(255,255,255,0.04);
-          box-shadow: 0 8px 30px rgba(2,6,23,0.7);
-          padding:36px; 
-          border-radius:16px;
-          backdrop-filter: blur(6px) saturate(120%);
-        }
-
-        /* Visual column */
-        .visual{
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          position:relative;
-          min-height:220px;
-        }
-
-        .code404{
-          font-weight:800;
-          font-size:6.5rem;
-          margin:0;
-          line-height:0.8;
-          letter-spacing:-6px;
-          background: linear-gradient(90deg, var(--accent1), var(--accent2));
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          text-shadow: 0 6px 30px rgba(102,126,234,0.12);
-        }
-
-        .orb{
-          position:absolute;
-          width:260px;
-          height:260px;
-          opacity:0.12;
-          transform: translateY(-6px);
-        }
-
-        /* Content column */
-        .content{
-          padding:8px 6px;
-        }
-
-        .title{
-          margin:0 0 8px 0;
-          font-size:1.6rem;
-          color: #eef2ff;
-          font-weight:700;
-        }
-
-        .desc{
-          margin:0 0 20px 0;
-          color: var(--muted);
-          line-height:1.6;
-        }
-
-        .actions{
-          display:flex;
-          gap:14px;
-          align-items:center;
-          margin-bottom:14px;
-          flex-wrap:wrap;
-        }
-
-        .btn{
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          gap:10px;
-          padding:12px 18px;
-          border-radius:999px;
-          font-weight:600;
-          border:1px solid transparent;
-          cursor:pointer;
-          transition: all .18s ease;
-        }
-
-        .btn.primary{
-          background: linear-gradient(90deg, var(--accent1), var(--accent2));
-          color: #041025;
-          box-shadow: 0 6px 20px rgba(79,209,197,0.12);
-          border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .btn.primary:hover{ transform: translateY(-2px); filter:brightness(1.02); }
-
-        .btn.ghost{
-          background: transparent;
-          color: var(--muted);
-          border: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .btn.ghost:hover{ background: var(--glass); color: #fff; }
-
-        .hint{
-          margin:0;
-          color: #9aa4b2;
-          font-size:0.86rem;
-        }
-
-        code{ background: rgba(255,255,255,0.03); padding:4px 8px; border-radius:6px; font-size:0.85rem; }
-
-        /* Responsive */
-        @media (max-width:900px){
-          .card{ grid-template-columns: 1fr; padding:20px; gap:18px; }
-          .code404{ font-size:5rem; }
-          .orb{ width:200px; height:200px; }
-        }
-
-        @media (max-width:480px){
-          .code404{ font-size:3.6rem; letter-spacing:-2px; }
-          .card{ padding:16px; }
-          .title{ font-size:1.25rem; }
-        }
-      `}</style>
+          <button
+            onClick={nextExercise}
+            className="w-full sm:w-auto px-8 py-3 bg-gray-600 text-white font-medium rounded-xl hover:bg-gray-700 transition-all shadow-md"
+          >
+            Keyingi mashq
+          </button>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Exercises;

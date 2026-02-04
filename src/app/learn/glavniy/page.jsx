@@ -1,15 +1,17 @@
 'use client'
 import React, { useState } from "react";
+import { validateLocaleAndSetLanguage } from "typescript";
 
 const initialLessons = [
   { id: 1, title: "Vocabulary", path: "/learn/vocab", checked: true },
   { id: 2, title: "Grammar", path: "/learn/glavniygrammar", checked: true },
 
-  { id: 3, title: "Speaking", path: "/learn/speaking" },
+  { id: 3, title: "Speaking", path: "/learn/speaking" ,checked :true },
   { id: 4, title: "Writing", path: "/learn/writing" }, 
   { id: 5, title: "Listening", path: "/learn/listening" },
   { id: 6, title: "Reading", path: "/learn/reading" },
   { id: 7, title: "Formulalar", path: "/learn/formulalar" },
+  { id: 8, title: "Exercises", path: "/learn/exercises" },
 ];
 
 const Learn = () => {
@@ -48,7 +50,7 @@ const Learn = () => {
             <a key={lesson.id} href={lesson.path}>
               <div className="lesson-card cursor-pointer">
 
-                {/* iOS style ACTIVE Badge */}
+           
                 {lesson.checked && (
                   <div className="ios-active-dot"></div>
                 )}

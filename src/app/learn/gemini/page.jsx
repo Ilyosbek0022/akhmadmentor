@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "lucide-react";
 import { useState } from "react";
 
 export default function GeminiPage() {
@@ -73,7 +74,7 @@ export default function GeminiPage() {
       }}
     >
       
-      <h2>🤖 Gemini API — Chat</h2>
+      <h2> Gemini API — Chat</h2>
 
       <textarea
         value={input}
