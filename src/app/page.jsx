@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-
+import Userslist from '../Userslist';
 
 const websiteData = {
   teacher: {
@@ -97,6 +97,7 @@ const Header = () => (
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/learn/glavniy">Learn</Link></li>
             <li><Link href="/learn/gemini">GEMINI AI</Link></li>
+            <li><Link href="/learn/admin">admin</Link></li>
           </ul>
         </nav>
       </div>
@@ -218,6 +219,7 @@ const Footer = () => (
   <footer id="contact" className="footer">
     <div className="container">
       <p>&copy; 2025 Mrakhmadjon IELTS Learning Center. All rights reserved.</p>
+      
     </div>
   </footer>
 );
@@ -227,6 +229,7 @@ const App = () => (
  
   <div className="app">
     <Header />
+    <Userslist/>
     <HeroSection />
     <TeacherInfo />
     <Courses />
