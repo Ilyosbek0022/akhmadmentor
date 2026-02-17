@@ -161,12 +161,17 @@ export default function SpeakingPage() {
   }
 
   /* ---------- COPY TEXT ---------- */
-  const copyText = async id => {
-    if (typeof navigator === 'undefined') return // serverda ishlamasin
-    if (!texts[id]) return
-    await navigator.clipboard.writeText(texts[id])
-    setLogs(l => [...l, `Task ${id}: text copied`])
-  }
+ const copyText = id => {
+  if (typeof window === 'undefined') return
+
+  const text = texts[id]
+  if (!text) return
+
+  window.navigator.clipboard.writeText(text)
+    .then(() => setLogs(l => [...l, `Task ${id}: text copied`]))
+    .catch(err => console.error(err))
+}
+
 
   /* ---------- UI ---------- */
   return (
