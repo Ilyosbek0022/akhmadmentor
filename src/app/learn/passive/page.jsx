@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../header";
 
 export default function PassiveVoicePage() {
   const [answers, setAnswers] = useState({});
@@ -50,29 +51,7 @@ export default function PassiveVoicePage() {
 
   return (
     <div className="all">
-            <header className="header">
-        <div className="container">
-          <div className="header-content">
-            <a href="/">
-              <div className="logo">
-                <div className="logo-icon">Mr</div>
-                <div className="logo-text">Akhmadjon IELTS</div>
-              </div>
-            </a>
-            <nav className="nav">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/price">Price</a></li>
-                <li><a href="/test">Tests</a></li>
-                <li><a href="/locate">Location</a></li>
-                <li><a href="/contact">Contact</a></li>
-                
-                <li><a href="/learn/glavniy">Learn</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+          <Header/>
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-violet-100 to-indigo-200 p-6">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-8 text-center">
         <h1 className="text-5xl font-bold text-indigo-700 mb-6">

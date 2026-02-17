@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../../learn/header";
 
 const questions = [
   { q: "Men ertaga kitob o‘qiyman", a: "I will read a book tomorrow." },
@@ -63,6 +64,8 @@ const FutureSimplePage = () => {
   };
 
   return (
+    <div className="all">
+      <Header/>
     <div className="min-h-screen flex items-center justify-center 
                     bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-100 px-6 py-16">
       <div className="max-w-5xl w-full space-y-16 text-center">
@@ -190,6 +193,7 @@ const FutureSimplePage = () => {
         </section>
       </div>
       <ToastContainer position="top-center" />
+    </div>
     </div>
   );
 };

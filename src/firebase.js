@@ -1,25 +1,29 @@
 // src/firebase.js
-"use client"; // Next.js App Router uchun (agar server componentda ishlatmoqchi bo'lsang olib tashla)
 
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 
-// 🔑 Firebase config — o'zing Firebase Console dan olasan
+// 🔑 Sening config
 const firebaseConfig = {
-  apiKey: "SENING_API_KEY",
-  authDomain: "SENING_AUTH_DOMAIN",
-  projectId: "SENING_PROJECT_ID",
-  storageBucket: "SENING_STORAGE_BUCKET",
-  messagingSenderId: "SENING_MESSAGING_SENDER_ID",
-  appId: "SENING_APP_ID",
+  apiKey: "AIzaSyD1B_i8jYaJ16GeBhKHIQ-uQgrP8qlIW4g",
+  authDomain: "akhmad-mentor.firebaseapp.com",
+  projectId: "akhmad-mentor",
+  storageBucket: "akhmad-mentor.firebasestorage.app",
+  messagingSenderId: "325098369673",
+  appId: "1:325098369673:web:a66417f7f2894d9ca7cc58",
+  measurementId: "G-0VFC3YQ870"
 };
 
-// Firebase app ni initialize qilish — bir marta ishga tushadi
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Firestore va Auth export qilamiz
-export const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+
+
 export const auth = getAuth(app);
 
-export default app;
+export const db = getFirestore(app);
+
+
+export const analytics =
+  typeof window !== "undefined" ? getAnalytics(app) : null;

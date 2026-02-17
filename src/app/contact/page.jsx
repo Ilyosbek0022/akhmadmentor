@@ -1,102 +1,75 @@
 "use client";
-import React  from "react";
+
+import { useState } from "react";
+import { auth, db } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 import Header from "../learn/header";
-import Footer from "../learn/footer";
 
-const Contact = () => {
+export default function RegisterPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const register = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    const form = e.target;
+      const user = userCredential.user;
 
-    const firstName = form["first-name"].value.trim();
-    const lastName = form["last-name"].value.trim();
-    const email = form.email.value.trim();
-    const phone = form["phone-number"].value.trim();
-    const message = form.message.value.trim();
-    const policy = form.policy.checked;
+      // 🔥 Firestore’da profil yaratish
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        role: "student",
+        level: 1,
+        totalScore: 0,
+        completedLessons: 0,
+        achievements: [],
+        createdAt: new Date()
+      });
 
-    // Validation
-    if (!firstName) return alert("Ismni kiriting!");
-    if (!lastName) return alert("Familiyani kiriting!");
-    if (!email || !/.+@.+\..+/.test(email)) return alert("To‘g‘ri email kiriting!");
-    if (!phone) return alert("Telefon raqamni kiriting!");
-    if (!message) return alert("Xabar yozing!");
-    if (!policy) return alert("Iltimos, maxfiylik siyosatiga rozilik bildiring!");
-
-    // 🚀 API ga yuborish
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, email, phone, message, policy }),
-    });
-
-    if (res.ok) {
-      alert("Form muvaffaqiyatli yuborildi!");
-      form.reset();
-    } else {
-      alert("Xatolik! Form yuborilmadi.");
+     toast.success("Registered successfully! Please log in.");
+    } catch (error) {
+      alert(error.message);
     }
-  }
+  };
 
   return (
     <div className="all">
-           
-
       <Header/>
-
-      <div className="contact-wrapper">
-        <div className="contact-header">
-          <h2>Contact Us</h2>
-       
-        </div>
-
-        <form method="post" className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-grid">
-            <div className="form-field">
-              <label htmlFor="first-name">First name</label>
-              <input type="text" name="first-name" id="first-name" />
-            </div>
-
-            <div className="form-field">
-              <label htmlFor="last-name">Last name</label>
-              <input type="text" name="last-name" id="last-name" />
-            </div>
-
-            <div className="form-field full">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" />
-            </div>
-
-            <div className="form-field full">
-              <label htmlFor="password">Email password</label>
-              <input type="password" name="phone-number" id="phone-number" />
-            </div>
-
-            <div className="form-field full">
-              <label htmlFor="message">Message</label>
-              <textarea name="message" id="message" rows="4" placeholder="How much is your beginner course?"></textarea>
-            </div>
-          </div>
-
-          <div className="policy-check">
-            <input type="checkbox" id="policy" name="policy" />
-            <label htmlFor="policy">
-              By selecting this, you agree to our{" "}
-              <a href="#" className="policy-link">privacy policy</a>.
-            </label>
-          </div>
-
-          <div className="form-submit">
-            <button type="submit">Let's talk</button>
-          </div>
-        </form>
-      </div>
-
-     <Footer/>
+      <h1 className="text-center text-2xl font-bold mt-10">Register</h1>
+      <div className="forloginpage">
+    <div className="flex flex-col gap-4 max-w-md mx-auto mt-20">
+      <input
+        placeholder="Name"
+        onChange={(e) => setName(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-2"
+      />
+      <button
+        onClick={register}
+        className="bg-green-500 text-white p-2"
+      >
+        Register
+      </button>
+    </div>
+    </div>
     </div>
   );
-};
-
-export default Contact;
+}

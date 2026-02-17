@@ -1,7 +1,7 @@
 // app/components/UsersList.jsx
 "use client"; // bu kerak, chunki useState/useEffect va DOM element bilan ishlaymiz
 
-import { db, auth } from "./firebase"; // pathni loyihaga moslashtir
+// import { db, auth } from "./firebase"; // pathni loyihaga moslashtir
 import { collection, getDocs } from "firebase/firestore";
 
 export default function UsersList() {

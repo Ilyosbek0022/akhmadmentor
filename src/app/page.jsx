@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Userslist from '../Userslist';
+
+import Navbar from './components/Navbar';
 
 const websiteData = {
   teacher: {
@@ -76,33 +77,40 @@ const websiteData = {
   ]
 };
 
-
+ 
 const Header = () => (
   
-  <header className="header static top-0 left-0 ">
-    <div className="container">
-      <div className="header-content">
-   
-        <Link href="/">
-        <div className="logo">
-          <div className="logo-icon">Mr</div>
-          <div className="logo-text">Akhmadjon IELTS</div>
-        </div></Link>
-        <nav className="nav">
-          <ul>
-                   <li><Link href="/">Home</Link></li>
-            <li><Link href="/price">Price</Link></li>
-            <li><Link href="/test">Tests</Link></li>
-            <li><Link href="/locate">Location</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/learn/glavniy">Learn</Link></li>
-            <li><Link href="/learn/gemini">GEMINI AI</Link></li>
-            <li><Link href="/learn/admin">admin</Link></li>
-          </ul>
-        </nav>
+  <header className="header static top-0 left-0">
+      <div className="container">
+        <div className="header-content flex items-center justify-between">
+          
+          <a href="/">
+            <div className="logo flex items-center gap-2">
+              <div className="logo-icon">Mr</div>
+              <div className="logo-text">Akhmadjon IELTS</div>
+            </div>
+          </a>
+
+          <div className="flex items-center gap-6">
+            <nav className="nav">
+              <ul className="flex items-center gap-6">
+                <li><a href="/">Home</a></li>
+              <li><a href="/price">Price</a></li>
+              <li><a href="/test">Tests</a></li>
+              <li><a href="/locate">Location</a></li>
+              <li><a href="/contact">Log-in</a></li>
+              <li><a href="/signup">Sign-up</a></li>
+              <li><a href="/learn/glavniy">Learn</a></li>
+              </ul>
+            </nav>
+
+          
+            <Navbar />
+          </div>
+
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 );
 
 
@@ -121,7 +129,6 @@ const HeroSection = () => (
     </div>
   </section>
 );
-
 
 const TeacherInfo = () => (
   <section id="about" className="teacher-info">
@@ -229,7 +236,7 @@ const App = () => (
  
   <div className="app">
     <Header />
-    <Userslist/>
+    
     <HeroSection />
     <TeacherInfo />
     <Courses />

@@ -1013,6 +1013,7 @@ textarea:focus {
 }
 .test-container input{
   height: 30px;
+  
   width: 30px;
 }
 .test-container label{
@@ -2459,7 +2460,7 @@ body, .page {
 }
 
 .lesson-card {
-  position: relative;
+  
   border-radius: 16px;
   overflow: visible;
 }
@@ -2981,4 +2982,11 @@ textarea:focus {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 3rem;
+}
+
+.forloginpage{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
 }

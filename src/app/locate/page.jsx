@@ -26,13 +26,13 @@ const Page = () => {
         </div></a>
             <nav className="nav">
               <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/price">Price</a></li>
-                <li><a href="/test">Tests</a></li>
-                <li><a href="/locate">Location</a></li>
-                <li><a href="/contact">Contact</a></li>
-
-                <li><a href="/learn/asospage">Learn</a></li>
+               <li><a href="/">Home</a></li>
+              <li><a href="/price">Price</a></li>
+              <li><a href="/test">Tests</a></li>
+              <li><a href="/locate">Location</a></li>
+              <li><a href="/contact">Log-in</a></li>
+              <li><a href="/signup">Sign-up</a></li>
+              <li><a href="/learn/glavniy">Learn</a></li>
                 <li>
                   <button
                     className="lkmn h-[40px] w-[40px] flex justify-center items-center bg-indigo-600 text-white rounded"
