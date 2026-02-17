@@ -1,11 +1,13 @@
-'use client'
-import RecordRTC from 'recordrtc'
-
+// 'use client' shunchaki client component fayllarida ishlaydi
+// utils/recorder.js
 let recorder
 let stream
 
 export const startRec = async () => {
+  if (typeof window === 'undefined') return // serverda ishlamasin
   stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+
+  const RecordRTC = (await import('recordrtc')).default // dynamic import, SSR da import qilinmaydi
 
   recorder = new RecordRTC(stream, {
     type: 'audio',
@@ -18,7 +20,8 @@ export const startRec = async () => {
 }
 
 export const stopRec = () =>
-  new Promise(resolve => {
+  new Promise(async resolve => {
+    if (typeof window === 'undefined') return resolve(null)
     recorder.stopRecording(() => {
       const blob = recorder.getBlob()
       stream.getTracks().forEach(t => t.stop())
