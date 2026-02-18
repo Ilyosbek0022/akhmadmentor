@@ -78,40 +78,6 @@ const websiteData = {
 };
 
  
-const Header = () => (
-  
-  <header className="header static top-0 left-0">
-      <div className="container">
-        <div className="header-content flex items-center justify-between">
-          
-          <a href="/">
-            <div className="logo flex items-center gap-2">
-              <div className="logo-icon">Mr</div>
-              <div className="logo-text">Akhmadjon IELTS</div>
-            </div>
-          </a>
-
-          <div className="flex items-center gap-6">
-            <nav className="nav">
-              <ul className="flex items-center gap-6">
-                <li><a href="/">Home</a></li>
-              <li><a href="/price">Price</a></li>
-              <li><a href="/test">Tests</a></li>
-              <li><a href="/locate">Location</a></li>
-              <li><a href="/contact">Log-in</a></li>
-              <li><a href="/signup">Sign-up</a></li>
-              <li><a href="/learn/glavniy">Learn</a></li>
-              </ul>
-            </nav>
-
-          
-            <Navbar />
-          </div>
-
-        </div>
-      </div>
-    </header>
-);
 
 
 const HeroSection = () => (
@@ -221,7 +187,74 @@ const MapSection = () => (
   </section>
 );
 
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header-wrapper">
+
+          
+          <a href="/" className="logo">
+            <div className="logo-icon">Mr</div>
+            <div className="logo-text">Akhmadjon IELTS</div>
+          </a>
+
+          
+          <div className="desktop-nav">
+            <nav>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/price">Price</a></li>
+                <li><a href="/test">Tests</a></li>
+                <li><a href="/locate">Location</a></li>
+                <li><a href="/contact">Log-in</a></li>
+                <li><a href="/signup">Sign-up</a></li>
+                <li><a href="/learn/glavniy">Learn</a></li>
+              </ul>
+            </nav>
+
+            <Navbar />
+          </div>
+
+          
+          <div className="mobile-right">
+            <Navbar />
+
+            <div
+              id="nav-icon3"
+              className={menuOpen ? "open" : ""}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="mobile-menu">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/price">Price</a></li>
+              <li><a href="/test">Tests</a></li>
+              <li><a href="/locate">Location</a></li>
+              <li><a href="/contact">Log-in</a></li>
+              <li><a href="/signup">Sign-up</a></li>
+              <li><a href="/learn/glavniy">Learn</a></li>
+            </ul>
+          </div>
+        )}
+
+      </div>
+    </header>
+  );
+};
 const Footer = () => (
   <footer id="contact" className="footer">
     <div className="container">

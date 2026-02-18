@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 interface UserData {
   name: string;
   email: string;
-  level: number;
   totalScore: number;
+  completedQuizzes: string[];
 }
 
 export default function Navbar() {
@@ -35,37 +35,75 @@ export default function Navbar() {
     return () => unsubscribe();
   }, []);
 
+  if (!userData) return null;
+
   const logout = async () => {
     await signOut(auth);
     router.push("/");
   };
 
-  if (!userData) return null;
+  const completedCount = userData.completedQuizzes?.length || 0;
 
+  const calculateLevel = () => {
+    if (completedCount === 0) return "🐧 Penguin";
+    if (completedCount < 6) return "Junior 🐣";
+    if (completedCount < 18) return "Middle 🚀";
+    return "Senior 👑";
+  };
+
+  const percentage = Math.round((completedCount / 18) * 100);
   const firstLetter = userData.name?.charAt(0).toUpperCase();
 
   return (
-    <div className="flex justify-end p-4 bg-black text-white relative">
+    <div className="relative">
+      {/* Avatar */}
       <div
         onClick={() => setOpen(!open)}
-        className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 cursor-pointer font-bold"
+        className="w-10 h-10 flex items-center justify-center 
+        rounded-full bg-gradient-to-br from-green-400 to-emerald-600 
+        cursor-pointer font-bold text-white shadow-md 
+        hover:scale-105 transition"
       >
         {firstLetter}
       </div>
 
+      {/* Dropdown */}
       {open && (
-        <div className="absolute top-16 right-4 bg-gray-900 p-4 rounded-lg w-56 shadow-lg">
-          <p className="font-bold">{userData.name}</p>
+        <div className="absolute right-0 mt-3 
+w-[90vw] max-w-xs sm:max-w-sm 
+p-5 rounded-2xl
+backdrop-blur-xl bg-black/80 text-white 
+border border-white/10 shadow-2xl">
+
+
+          <p className="font-bold text-lg">{userData.name}</p>
           <p className="text-sm text-gray-400">{userData.email}</p>
 
-          <hr className="my-2 border-gray-700" />
+          <div className="mt-4 space-y-2 text-sm">
+            <p>Level: <span className="font-semibold">{calculateLevel()}</span></p>
+            <p>Total Score: {userData.totalScore}</p>
+            <p>Progress: {percentage}%</p>
+          </div>
 
-          <p>Level: {userData.level}</p>
-          <p>Total Score: {userData.totalScore}</p>
+          {/* Progress bar */}
+          <div className="w-full bg-white/10 rounded-full h-2 mt-2">
+            <div className="bg-green-400 h-2 rounded-full transition-all progress-fill"
+              style={{ "--progress-width": `${percentage}%` } as React.CSSProperties}
+            ></div>
+          </div>
+
+          <hr className="my-4 border-white/10" />
+
+          <button
+            onClick={() => router.push("/profile")}
+            className="w-full mb-2 p-2 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          >
+            View Profile
+          </button>
 
           <button
             onClick={logout}
-            className="mt-3 w-full bg-red-500 p-2 rounded"
+            className="w-full p-2 rounded-lg bg-red-500 hover:bg-red-600 transition"
           >
             Logout
           </button>

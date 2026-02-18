@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { startRec, stopRec } from '../../utils/recorder'
+import Navbar from '../../components/Navbar'
 
 const PARTS = [
   { id: 1, level: 'A2', title: 'Task 1 — Personal Information', desc: 'Answer simple questions about yourself.', questions: ['Can you introduce yourself?', 'Where do you live?', 'What do you do every day?', 'What do you do in your free time?'], prep: 5, speak: 45 },
@@ -89,14 +90,38 @@ export default function SpeakingPageContent() {
 
   return (
     <div className="all">
-      <header className="header forheight">
-        <div className="container">
-          <div className="header-content">
-            <a href="/"><div className="logo"><div className="logo-icon">M</div><div className="logo-text"> Mrakhmadjon IELTS</div></div></a>
-            <nav className="nav"><ul><li><a href="/">Home</a></li><li><a href="/test">Tests</a></li><li><a href="/learn/asospage">Learn</a></li></ul></nav>
-          </div>
-        </div>
-      </header>
+       <header className="header forheight">
+            <div className="container">
+              <div className="header-content flex items-center justify-between">
+                
+                <a href="/">
+                  <div className="logo flex items-center gap-2">
+                    <div className="logo-icon">Mr</div>
+                    <div className="logo-text">Akhmadjon IELTS</div>
+                  </div>
+                </a>
+      
+                <div className="flex items-center gap-6">
+                  <nav className="nav">
+                    <ul className="flex items-center gap-6">
+                     <li><a href="/">Home</a></li>
+                    <li><a href="/price">Price</a></li>
+                    <li><a href="/test">Tests</a></li>
+                    <li><a href="/locate">Location</a></li>
+                    <li><a href="/contact">Log-in</a></li>
+                    <li><a href="/signup">Sign-up</a></li>
+                    <li><a href="/learn/glavniy">Learn</a></li>
+                    </ul>
+                  </nav>
+      
+                  
+                  <Navbar />
+                </div>
+      
+              </div>
+            </div>
+          </header>
+    
 
       <div className="wrap">
         <h1>CEFR Speaking Practice</h1>

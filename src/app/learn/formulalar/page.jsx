@@ -59,6 +59,8 @@ export default function GrammarPlatformPage(){
  /* ===== LOGIN PAGE ===== */
  if(!user){
   return(
+    <div className="all">
+      <Header/>
    <div className="min-h-screen flex items-center justify-center bg-black text-white">
     <div className="bg-neutral-900 p-10 rounded-3xl w-80">
      <h2 className="text-3xl font-bold mb-6 text-center">Log-in(ismingiz)</h2>
@@ -78,6 +80,7 @@ export default function GrammarPlatformPage(){
      </button>
     </div>
    </div>
+  </div>
   )
  }
 

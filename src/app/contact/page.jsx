@@ -23,16 +23,14 @@ export default function RegisterPage() {
       const user = userCredential.user;
 
       // 🔥 Firestore’da profil yaratish
-      await setDoc(doc(db, "users", user.uid), {
-        name: name,
-        email: email,
-        role: "student",
-        level: 1,
-        totalScore: 0,
-        completedLessons: 0,
-        achievements: [],
-        createdAt: new Date()
-      });
+     await setDoc(doc(db, "users", user.uid), {
+  name: name,
+  email: email,
+  role: "student",
+  totalScore: 0,
+  completedQuizzes: [],
+  createdAt: new Date()
+});
 
      toast.success("Registered successfully! Please log in.");
     } catch (error) {

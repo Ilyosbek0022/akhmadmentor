@@ -1,37 +1,71 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="header">
       <div className="container">
-        <div className="header-content flex items-center justify-between">
-          
-          <a href="/">
-            <div className="logo flex items-center gap-2">
-              <div className="logo-icon">Mr</div>
-              <div className="logo-text">Akhmadjon IELTS</div>
-            </div>
+        <div className="header-wrapper">
+
+          {/* LOGO */}
+          <a href="/" className="logo">
+            <div className="logo-icon">Mr</div>
+            <div className="logo-text">Akhmadjon IELTS</div>
           </a>
 
-          <div className="flex items-center gap-6">
-            <nav className="nav">
-              <ul className="flex items-center gap-6">
-               <li><a href="/">Home</a></li>
+          {/* DESKTOP NAV */}
+          <div className="desktop-nav">
+            <nav>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/price">Price</a></li>
+                <li><a href="/test">Tests</a></li>
+                <li><a href="/locate">Location</a></li>
+                <li><a href="/contact">Log-in</a></li>
+                <li><a href="/signup">Sign-up</a></li>
+                <li><a href="/learn/glavniy">Learn</a></li>
+              </ul>
+            </nav>
+
+            <Navbar />
+          </div>
+
+          {/* MOBILE RIGHT SIDE */}
+          <div className="mobile-right">
+            <Navbar />
+
+            <div
+              id="nav-icon3"
+              className={menuOpen ? "open" : ""}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="mobile-menu">
+            <ul>
+              <li><a href="/">Home</a></li>
               <li><a href="/price">Price</a></li>
               <li><a href="/test">Tests</a></li>
               <li><a href="/locate">Location</a></li>
               <li><a href="/contact">Log-in</a></li>
               <li><a href="/signup">Sign-up</a></li>
               <li><a href="/learn/glavniy">Learn</a></li>
-              </ul>
-            </nav>
-
-            {/* Avatar / Navbar component */}
-            <Navbar />
+            </ul>
           </div>
+        )}
 
-        </div>
       </div>
     </header>
   );
