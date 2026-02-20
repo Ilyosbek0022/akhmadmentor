@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "src/app/page.jsx",
     ".next/dev/types/**/*.ts"
-  ],
+, "src/app/components/QuizContainer.jsx", "src/app/components/ResultScreen.jsx", "src/app/components/StartScreen.jsx", "src/app/darajalar/turlara1/page.jsx", "src/app/components/page.jsx", "src/app/components/Navbar.jsx", "src/app/layout.jsx", "src/lib/utils.jsx", "types/index.d.jsx", "quizData.jsx"  ],
   "exclude": [
     "node_modules"
   ]

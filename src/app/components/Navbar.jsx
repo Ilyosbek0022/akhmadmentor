@@ -1,31 +1,24 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { signOut, onAuthStateChanged, User } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
-interface UserData {
-  name: string;
-  email: string;
-  totalScore: number;
-  completedQuizzes: string[];
-}
-
 export default function Navbar() {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setUserData(docSnap.data() as UserData);
+          setUserData(docSnap.data());
         }
       } else {
         setUserData(null);
@@ -70,11 +63,10 @@ export default function Navbar() {
       {/* Dropdown */}
       {open && (
         <div className="absolute right-0 mt-3 
-w-[90vw] max-w-xs sm:max-w-sm 
-p-5 rounded-2xl
-backdrop-blur-xl bg-black/80 text-white 
-border border-white/10 shadow-2xl">
-
+          w-[90vw] max-w-xs sm:max-w-sm 
+          p-5 rounded-2xl
+          backdrop-blur-xl bg-black/80 text-white 
+          border border-white/10 shadow-2xl">
 
           <p className="font-bold text-lg">{userData.name}</p>
           <p className="text-sm text-gray-400">{userData.email}</p>
@@ -87,8 +79,9 @@ border border-white/10 shadow-2xl">
 
           {/* Progress bar */}
           <div className="w-full bg-white/10 rounded-full h-2 mt-2">
-            <div className="bg-green-400 h-2 rounded-full transition-all progress-fill"
-              style={{ "--progress-width": `${percentage}%` } as React.CSSProperties}
+            <div 
+              className="bg-green-400 h-2 rounded-full transition-all"
+              style={{ width: `${percentage}%` }}
             ></div>
           </div>
 

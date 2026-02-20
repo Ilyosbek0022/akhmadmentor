@@ -1,8 +1,6 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-
+import "./index.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,24 +11,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
-export const metadata: Metadata = {
+// Metadata tipini olib tashladik, faqat oddiy JS obyekti
+export const metadata = {
   title: "Akhmad Mentor",
   description: "Ahmadjon Qahramonovich o`quv platformasi",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// RootLayout uchun JSX, type annotationlar olib tashlandi
+export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       {children}
+        {children}
       </body>
     </html>
   );

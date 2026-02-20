@@ -52,7 +52,7 @@ export default function SignupPage() {
       <input
         placeholder="Name"
         onChange={(e) => setName(e.target.value)}
-        className="border p-2"
+        className="border p-2 coloroq"
       />
 
       <input

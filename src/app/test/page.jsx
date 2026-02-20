@@ -71,6 +71,14 @@ const page = () => {
         TestAmount: "10",
         link: "/darajalar/quicktest",
       },
+       {
+        title: "Full exam test",
+        description:
+          "taest ayooo",
+        level: "A1-b2",
+        TestAmount: "A1-b2",
+        link: "/darajalar/full-exam-test",
+      },
     ],
   };
 
