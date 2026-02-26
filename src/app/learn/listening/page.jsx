@@ -267,7 +267,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   const [pmDuration, setPmDuration] = useState(0);
   const [cqAnswered, setCqAnswered] = useState([]);
   const [cqScore, setCqScore] = useState(0);
-  const [activePanel, setActivePanel] = useState(null); // 'transcript', 'gapfill', 'dictation', 'shadow', 'comp'
+  const [activePanel, setActivePanel] = useState(null);
   const [gapFillInputs, setGapFillInputs] = useState({});
   const [gapFillResult, setGapFillResult] = useState({ show: false, message: '', type: '' });
   const [dictationText, setDictationText] = useState('');
@@ -291,10 +291,17 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   const [qAnswered, setQAnswered] = useState(false);
   const [qShowResult, setQShowResult] = useState(false);
 
-  // Refs
+  // Refs - initialize as null on server
   const pmIntervalRef = useRef(null);
   const heroIntervalRef = useRef(null);
-  const synth = window.speechSynthesis;
+  const synthRef = useRef(null);
+  
+  // Initialize synth only on client
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      synthRef.current = window.speechSynthesis;
+    }
+  }, []);
 
   // ======================== EFFECTS ========================
   useEffect(() => {
@@ -313,7 +320,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
           if (newProgress >= 1) {
             setPmPlaying(false);
             clearInterval(pmIntervalRef.current);
-            if (synth) synth.cancel();
+            if (synthRef.current) synthRef.current.cancel();
             return 0;
           }
           return newProgress;
@@ -326,22 +333,22 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   }, [pmPlaying, pmDuration]);
 
   useEffect(() => {
-    if (pmPlaying && currentAudio && synth) {
+    if (pmPlaying && currentAudio && synthRef.current) {
       const words = currentAudio.transcript.split(/\s+/);
       const idx = Math.floor(pmProgress * words.length);
       if (idx !== pmWordIdx && idx < words.length) {
         setPmWordIdx(idx);
-        synth.cancel();
+        synthRef.current.cancel();
         const chunk = words.slice(idx, Math.min(idx + 5, words.length)).join(' ');
         const utterance = new SpeechSynthesisUtterance(chunk);
         utterance.lang = 'en-GB';
         utterance.rate = 0.88 * pmSpeed;
         utterance.volume = pmVolume;
-        synth.speak(utterance);
+        synthRef.current.speak(utterance);
         if (autoScroll) scrollTranscript(idx);
       }
     }
-  }, [pmProgress, pmPlaying, currentAudio, pmWordIdx, pmSpeed, pmVolume, autoScroll, synth]);
+  }, [pmProgress, pmPlaying, currentAudio, pmWordIdx, pmSpeed, pmVolume, autoScroll]);
 
   useEffect(() => {
     if (heroPlaying) {
@@ -351,7 +358,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
           if (newProgress >= 1) {
             setHeroPlaying(false);
             clearInterval(heroIntervalRef.current);
-            if (synth) synth.cancel();
+            if (synthRef.current) synthRef.current.cancel();
             return 0;
           }
           return newProgress;
@@ -361,21 +368,21 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
       clearInterval(heroIntervalRef.current);
     }
     return () => clearInterval(heroIntervalRef.current);
-  }, [heroPlaying, heroDuration, heroSpeed, synth]);
+  }, [heroPlaying, heroDuration, heroSpeed]);
 
   useEffect(() => {
-    if (heroPlaying && synth) {
+    if (heroPlaying && synthRef.current) {
       const heroWords = "Hello my name is Emily and I will tell you about morning routines and habits that make life wonderful and productive in so many ways".split(' ');
       const idx = Math.floor(heroProgress * heroWords.length);
       if (idx < heroWords.length) {
-        synth.cancel();
+        synthRef.current.cancel();
         const utterance = new SpeechSynthesisUtterance(heroWords[idx]);
         utterance.lang = 'en-GB';
         utterance.rate = 0.95 * heroSpeed;
-        synth.speak(utterance);
+        synthRef.current.speak(utterance);
       }
     }
-  }, [heroProgress, heroPlaying, heroSpeed, synth]);
+  }, [heroProgress, heroPlaying, heroSpeed]);
 
   const startTips = () => {
     const interval = setInterval(() => {
@@ -407,16 +414,16 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const speakPhone = (word) => {
-    if (!synth) {
+    if (!synthRef.current) {
       alert('Brauzeringiz TTS qo\'llamaydi.');
       return;
     }
-    synth.cancel();
+    synthRef.current.cancel();
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-GB';
     utterance.rate = 0.7;
     utterance.pitch = 1;
-    synth.speak(utterance);
+    synthRef.current.speak(utterance);
   };
 
   const startChallenge = (num) => {
@@ -453,14 +460,18 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
     setPmDuration(parseInt(parts[0]) * 60 + parseInt(parts[1]));
 
     setModalOpen(true);
-    document.body.style.overflow = 'hidden';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden';
+    }
   };
 
   const closePlayer = () => {
     setPmPlaying(false);
-    if (synth) synth.cancel();
+    if (synthRef.current) synthRef.current.cancel();
     setModalOpen(false);
-    document.body.style.overflow = '';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
   };
 
   const togglePlayer = () => {
@@ -531,6 +542,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const scrollTranscript = (idx) => {
+    if (typeof document === 'undefined') return;
     const el = document.getElementById(`tw_${idx}`);
     const body = document.getElementById('transcriptBody');
     if (el && body) {
@@ -577,6 +589,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const resetGapFill = () => {
+    if (typeof document === 'undefined') return;
     document.querySelectorAll('.gap-input').forEach(inp => {
       inp.value = '';
       inp.classList.remove('correct', 'wrong');
@@ -585,6 +598,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const showGapHint = () => {
+    if (typeof document === 'undefined') return;
     document.querySelectorAll('.gap-input').forEach(inp => {
       if (!inp.value) {
         inp.placeholder = inp.dataset.ans[0] + '_'.repeat(inp.dataset.ans.length - 1);
@@ -593,13 +607,13 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const playDictSegment = (slow = false) => {
-    if (!currentAudio || !synth) return;
-    synth.cancel();
+    if (!currentAudio || !synthRef.current) return;
+    synthRef.current.cancel();
     const utterance = new SpeechSynthesisUtterance(currentAudio.dictSegment);
     utterance.lang = 'en-GB';
     utterance.rate = slow ? 0.55 : 0.82;
     utterance.volume = pmVolume;
-    synth.speak(utterance);
+    synthRef.current.speak(utterance);
   };
 
   const checkDictation = () => {
@@ -637,6 +651,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const toggleMic = () => {
+    if (typeof window === 'undefined') return;
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
       alert('Brauzeringiz nutqni tanishni qo\'llamaydi. Chrome ishlatib ko\'ring.');
       return;
@@ -652,6 +667,7 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
   };
 
   const resetShadow = () => {
+    if (typeof document === 'undefined') return;
     document.querySelectorAll('.sh-word').forEach(s => s.classList.remove('sh-active'));
     setPmProgress(0);
     setPmWordIdx(-1);
@@ -734,8 +750,10 @@ The consequences for philosophy of mind, cognitive science, and artificial intel
     return m + ':' + s;
   };
 
-  // Keyboard shortcuts
+  // Keyboard shortcuts - only on client
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleKeyDown = (e) => {
       if (!modalOpen) return;
       if (e.code === 'Space') {
