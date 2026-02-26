@@ -8,11 +8,11 @@ const initialLessons = [
   { id: 2, title: "Grammar", path: "/learn/glavniygrammar", checked: true },
 
   { id: 3, title: "Speaking", path: "/learn/speaking" ,checked :true },
-  { id: 4, title: "Writing", path: "/learn/writing" }, 
+  { id: 4, title: "Writing", path: "/learn/writing",checked :true  }, 
   { id: 5, title: "Listening", path: "/learn/listening" },
-  { id: 6, title: "Reading", path: "/learn/reading" },
-  { id: 7, title: "Formulalar", path: "/learn/formulalar" },
-  { id: 8, title: "Exercises", path: "/learn/exercises" },
+  { id: 6, title: "Reading", path: "/learn/reading" ,checked :true  },
+  { id: 7, title: "Formulalar", path: "/learn/formulalar",checked :true   },
+  { id: 8, title: "Exercises", path: "/learn/exercises",checked :true   },
 ];
 
 const Learn = () => {

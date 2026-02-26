@@ -8,6 +8,7 @@ const initialVocabulary = [
   { id: 4, title: "B2 – Upper-Intermediate Vocabulary", path: "/learn/vocabulary/b2" },
   { id: 5, title: "C1 – Advanced Vocabulary", path: "/learn/vocabulary/c1" },
   { id: 6, title: "C2 – Proficiency Vocabulary", path: "/learn/vocabulary/c2" },
+  { id: 7, title: "Extra helps and tips", path: "/learn/vocabulary/extrahelp" },
 ];
 
 const Learn = () => {
