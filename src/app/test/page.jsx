@@ -74,7 +74,7 @@ const page = () => {
        {
         title: "Full exam test",
         description:
-          "taest ayooo",
+          "Comprehensive grammar test covering all levels from A1 to B2 to assess your overall proficiency.",
         level: "A1-b2",
         TestAmount: "A1-b2",
         link: "/darajalar/full-exam-test",
