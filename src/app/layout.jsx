@@ -11,7 +11,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Metadata tipini olib tashladik, faqat oddiy JS obyekti
+
 export const metadata = {
   title: "Akhmad Mentor",
   description: "Ahmadjon Qahramonovich o`quv platformasi",
